@@ -1,0 +1,35 @@
+{
+  "name": "saobracajni-duel",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n web,realtime \"npm run dev -w @duel/web\" \"npm run dev -w @duel/realtime\"",
+    "build": "npm run build -w @duel/realtime && npm run build -w @duel/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "tsx --test packages/domain/src/*.test.ts",
+    "test:db": "tsx --env-file-if-exists=.env --test packages/db/src/*.test.ts",
+    "db:generate": "prisma generate --config packages/db/prisma.config.ts",
+    "db:migrate": "prisma migrate deploy --config packages/db/prisma.config.ts",
+    "db:dev": "prisma migrate dev --config packages/db/prisma.config.ts",
+    "content:validate": "tsx packages/db/src/import.ts --validate",
+    "content:import": "tsx --env-file-if-exists=.env packages/db/src/import.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "concurrently": "^9.2.0",
+    "dotenv": "^17.2.0",
+    "prettier": "^3.6.0",
+    "prisma": "^7.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}

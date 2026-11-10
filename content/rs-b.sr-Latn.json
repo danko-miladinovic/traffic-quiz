@@ -1,0 +1,205 @@
+{
+  "jurisdiction": "RS",
+  "locale": "sr-Latn-RS",
+  "language": "sr",
+  "script": "Latn",
+  "licenceCategory": "B",
+  "categories": [
+    {
+      "key": "signalizacija",
+      "title": "Saobraćajna signalizacija",
+      "description": "Razumevanje svetlosnih signala i njihovih poruka."
+    },
+    {
+      "key": "prvenstvo",
+      "title": "Prvenstvo prolaza",
+      "description": "Pravila susretanja vozila i prolaska kroz raskrsnice."
+    },
+    {
+      "key": "bezbednost",
+      "title": "Bezbedna vožnja",
+      "description": "Navike i pravila za bezbednost vozača i putnika."
+    }
+  ],
+  "questions": [
+    {
+      "key": "crveno-svetlo",
+      "revision": 1,
+      "category": "signalizacija",
+      "prompt": "Na semaforu je samo crveno svetlo. Prolaz je:",
+      "explanation": "Crveno traži zaustavljanje. Ne kreći samo zato što na raskrsnici trenutno nema drugih vozila.",
+      "options": [
+        {
+          "key": "odgovor-1",
+          "text": "Zabranjen"
+        },
+        {
+          "key": "odgovor-2",
+          "text": "Dozvoljen"
+        }
+      ],
+      "correctOption": "odgovor-1",
+      "sources": [
+        {
+          "title": "Zakon o bezbednosti saobraćaja na putevima — MGSI, verzija do 76/2023",
+          "url": "https://www.mgsi.gov.rs/sites/default/files/zakon_o_bezbednosti_saobracaja_na_putevima.pdf",
+          "accessedOn": "2026-11-10",
+          "reference": "Član 142, stav 1, tačka 1"
+        }
+      ],
+      "rights": {
+        "license": "PROJECT-ORIGINAL",
+        "attribution": "Saobraćajni Duel — originalni obrazovni primer",
+        "original": true
+      },
+      "review": {
+        "status": "DRAFT"
+      },
+      "image": {
+        "path": "/illustrations/crveno-svetlo.svg",
+        "alt": "Semafor sa uključenim crvenim svetlom i ugašenim žutim i zelenim svetlom.",
+        "rights": {
+          "license": "PROJECT-ORIGINAL",
+          "attribution": "Saobraćajni Duel — originalni obrazovni primer",
+          "original": true
+        }
+      }
+    },
+    {
+      "key": "crveno-zuto",
+      "revision": 1,
+      "category": "signalizacija",
+      "prompt": "Crveno i žuto svetlo gore zajedno. Da li krećeš?",
+      "explanation": "Sačekaj zeleno. Ova kombinacija najavljuje promenu, ali još ne dopušta prolazak.",
+      "options": [
+        {
+          "key": "odgovor-1",
+          "text": "Ne"
+        },
+        {
+          "key": "odgovor-2",
+          "text": "Da"
+        }
+      ],
+      "correctOption": "odgovor-1",
+      "sources": [
+        {
+          "title": "Zakon o bezbednosti saobraćaja na putevima — MGSI, verzija do 76/2023",
+          "url": "https://www.mgsi.gov.rs/sites/default/files/zakon_o_bezbednosti_saobracaja_na_putevima.pdf",
+          "accessedOn": "2026-11-10",
+          "reference": "Član 142, stav 1, tačka 4"
+        }
+      ],
+      "rights": {
+        "license": "PROJECT-ORIGINAL",
+        "attribution": "Saobraćajni Duel — originalni obrazovni primer",
+        "original": true
+      },
+      "review": {
+        "status": "DRAFT"
+      }
+    },
+    {
+      "key": "zuti-treptaj",
+      "revision": 1,
+      "category": "signalizacija",
+      "prompt": "Šta zahteva trepćuće žuto svetlo na semaforu?",
+      "explanation": "Pažljivo proceni situaciju. Trepćuće žuto nije obećanje da drugi učesnici moraju da te propuste.",
+      "options": [
+        {
+          "key": "odgovor-1",
+          "text": "Povećanu opreznost"
+        },
+        {
+          "key": "odgovor-2",
+          "text": "Ubrzavanje"
+        }
+      ],
+      "correctOption": "odgovor-1",
+      "sources": [
+        {
+          "title": "Zakon o bezbednosti saobraćaja na putevima — MGSI, verzija do 76/2023",
+          "url": "https://www.mgsi.gov.rs/sites/default/files/zakon_o_bezbednosti_saobracaja_na_putevima.pdf",
+          "accessedOn": "2026-11-10",
+          "reference": "Član 142, stav 1, tačka 5"
+        }
+      ],
+      "rights": {
+        "license": "PROJECT-ORIGINAL",
+        "attribution": "Saobraćajni Duel — originalni obrazovni primer",
+        "original": true
+      },
+      "review": {
+        "status": "DRAFT"
+      }
+    },
+    {
+      "key": "desna-strana",
+      "revision": 1,
+      "category": "prvenstvo",
+      "prompt": "Dva automobila na raskrsnici bez regulisanog prvenstva: propuštaš vozilo sa:",
+      "explanation": "Prati ko dolazi zdesna. U ovom primeru nema tramvaja ni drugih pravila koja menjaju prvenstvo.",
+      "options": [
+        {
+          "key": "odgovor-1",
+          "text": "Desne strane"
+        },
+        {
+          "key": "odgovor-2",
+          "text": "Leve strane"
+        }
+      ],
+      "correctOption": "odgovor-1",
+      "sources": [
+        {
+          "title": "Zakon o bezbednosti saobraćaja na putevima — MGSI, verzija do 76/2023",
+          "url": "https://www.mgsi.gov.rs/sites/default/files/zakon_o_bezbednosti_saobracaja_na_putevima.pdf",
+          "accessedOn": "2026-11-10",
+          "reference": "Član 47, stav 3"
+        }
+      ],
+      "rights": {
+        "license": "PROJECT-ORIGINAL",
+        "attribution": "Saobraćajni Duel — originalni obrazovni primer",
+        "original": true
+      },
+      "review": {
+        "status": "DRAFT"
+      }
+    },
+    {
+      "key": "pojas",
+      "revision": 1,
+      "category": "bezbednost",
+      "prompt": "Da li odrasli putnik pozadi koristi ugrađeni sigurnosni pojas?",
+      "explanation": "I zadnje sedište zahteva vezivanje. Pojas koristi prema uputstvu proizvođača vozila.",
+      "options": [
+        {
+          "key": "odgovor-1",
+          "text": "Da"
+        },
+        {
+          "key": "odgovor-2",
+          "text": "Ne"
+        }
+      ],
+      "correctOption": "odgovor-1",
+      "sources": [
+        {
+          "title": "Zakon o bezbednosti saobraćaja na putevima — MGSI, verzija do 76/2023",
+          "url": "https://www.mgsi.gov.rs/sites/default/files/zakon_o_bezbednosti_saobracaja_na_putevima.pdf",
+          "accessedOn": "2026-11-10",
+          "reference": "Član 30, stav 1"
+        }
+      ],
+      "rights": {
+        "license": "PROJECT-ORIGINAL",
+        "attribution": "Saobraćajni Duel — originalni obrazovni primer",
+        "original": true
+      },
+      "review": {
+        "status": "DRAFT"
+      }
+    }
+  ]
+}

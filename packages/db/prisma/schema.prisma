@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ReviewStatus {
+  DRAFT
+  REVIEWED
+  PUBLISHED
+}
+
+model Jurisdiction {
+  code    String          @id @db.Char(2)
+  name    String
+  locales ContentLocale[]
+}
+
+model ContentLocale {
+  id              String       @id
+  jurisdictionCode String      @db.Char(2)
+  jurisdiction    Jurisdiction @relation(fields: [jurisdictionCode], references: [code], onDelete: Restrict)
+  language        String
+  script          String
+  categories      Category[]
+  @@unique([jurisdictionCode, language, script])
+}
+
+model Category {
+  id              String             @id @default(cuid())
+  localeId        String
+  locale          ContentLocale      @relation(fields: [localeId], references: [id], onDelete: Restrict)
+  licenceCategory String
+  key             String
+  title           String
+  description     String
+  questions       QuestionRevision[]
+  @@unique([localeId, licenceCategory, key])
+}
+
+model QuestionRevision {
+  id              String       @id @default(cuid())
+  categoryId      String
+  category        Category     @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  key             String
+  revision        Int
+  prompt          String
+  explanation     String
+  correctOption   String
+  status          ReviewStatus @default(DRAFT)
+  reviewer        String?
+  reviewedOn      DateTime?    @db.Date
+  publishedAt     DateTime?
+  sources         Json
+  rights          Json
+  image           Json?
+  content         Json
+  createdAt       DateTime    @default(now())
+  options         AnswerOption[]
+  @@unique([categoryId, key, revision])
+  @@index([status, categoryId])
+}
+
+model AnswerOption {
+  id         String           @id @default(cuid())
+  questionId String
+  question   QuestionRevision @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  key        String
+  text       String
+  position   Int
+  @@unique([questionId, key])
+  @@unique([questionId, position])
+}
