@@ -1,6 +1,6 @@
 # Project guidance
 
-Read README.md, docs/implementation-plan.md, and docs/foundation-decisions.md before changing the application. Phase 1 scaffolding exists; practice and multiplayer gameplay remain unimplemented.
+Read README.md, docs/implementation-plan.md, docs/foundation-decisions.md, and docs/practice.md before changing the application. Practice is implemented; multiplayer gameplay remains unimplemented.
 
 ## Product constraints
 
@@ -30,3 +30,6 @@ Read README.md, docs/implementation-plan.md, and docs/foundation-decisions.md be
 - Use Node 24 and npm workspaces. Run `npm run db:generate` before type checks on a fresh checkout. Keep package-lock.json synchronized and use `npm ci` in CI.
 - Run database integration checks only with an explicit TEST_DATABASE_URL pointing to disposable PostgreSQL. Tests intentionally retain immutable published fixtures.
 - Keep supplied draft content unpublished until a qualified reviewer has checked current official sources. Never fabricate reviewer identities or dates. See content/README.md.
+- Use the opt-in, development-only synthetic walkthrough to preview practice; never expose the draft educational bank or enable demo attempts in production.
+- Keep guest credentials HttpOnly and hashed at rest. Authorize every attempt read/write by guest, preserve frozen question/option order, and keep submissions idempotent. Never send unrevealed answer keys to the browser.
+- Browser tests require TEST_DATABASE_URL and start their own dev server. Run npm run test:e2e after gameplay UI changes; keep desktop/mobile, keyboard, resume, and network-recovery coverage meaningful.

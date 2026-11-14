@@ -5,7 +5,7 @@
 - Scope: Serbia, passenger-car B category, Serbian Latin (`sr-Latn-RS`). These are reversible starting defaults selected from the plan, not a claim that an earlier specification confirmed them.
 - Content: original project material with explicit source references and rights metadata. No official exam-bank reuse. All shipped questions remain DRAFT pending qualified review against current rules.
 - Scoring proposal retained for phase 3: correct-answer count first, then total server-measured response time for correct answers, then a draw. Do not implement or present this as a finalized competition rule yet. The proposed 20-second timer also needs accessibility and reading-difficulty review.
-- Storage: only editorial content is modeled in phase 1. Guest, practice, and duel tables will be added with their owning feature rather than guessed in advance.
+- Storage: phase 2 adds GuestSession, PracticeAttempt, PracticeQuestion snapshots, and PracticeAnswer. Duel tables remain deferred to phase 3.
 - Development: npm workspaces, Node 24, Next.js App Router, Tailwind 4, Prisma 7 with the PostgreSQL adapter, and a separate Node/Socket.IO skeleton. Local PostgreSQL uses Compose. No paid infrastructure or hosting is provisioned.
 - The web foundation is statically renderable and does not require a database to display its shell. Content tools validate a database URL only when they connect. Realtime configuration is validated at startup. The realtime server listens on loopback behind the intended reverse proxy and exposes no gameplay handlers.
 - Next.js uses its supported Webpack mode for development and builds. Turbopack's CSS worker cannot bind its internal port in this execution environment even with elevated execution; Webpack avoids that environment-specific dependency. Revisit the faster bundler when the deployment environment is established.
@@ -25,11 +25,11 @@ The foundation collects no guest identities, answers, analytics, or ad data. Dra
 | Reviewed content and immutable revisions | Retain for editorial/history purposes, with minimal reviewer details                        |
 | Backups                                  | Rolling 30-day expiry, with deletion behavior documented before launch                      |
 
-These are engineering defaults, not a legal-compliance conclusion. Before collecting such data, confirm the actual controller, hosting behavior, required consent/legal basis, deletion processes, and published privacy information. Implement and test scheduled cleanup in the phases that introduce the records. No cleanup jobs are claimed to exist in phase 1.
+Phase 2 implements 30-day guest inactivity expiry, 24-hour active-attempt expiry, and 30-day raw practice retention. The persistent web process cleans on first database use and hourly; data:cleanup supports an independent daily scheduler. See docs/practice.md. Other rows above remain defaults for future infrastructure/features. Before public launch, confirm the actual controller, hosting behavior, required consent/legal basis, backup/log retention, and published privacy information. These are engineering defaults, not a legal-compliance conclusion.
 
 ## Remaining review gates
 
 - Qualified reviewer approval and current-law verification for the draft bank.
 - Product confirmation or adjustment of B category, script, multiplayer scoring, and question timer before those assumptions become expensive to change.
 - Browser-based mobile, keyboard, and screen-reader QA before public launch.
-- Public hosting, operational privacy details, and retention implementation when persistent gameplay begins.
+- Public hosting, operational privacy details, monitoring of practice cleanup, and backup/log retention.

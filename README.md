@@ -4,9 +4,9 @@ A free, mobile-first traffic education app for Serbia, combining practice quizze
 
 ## Project status
 
-Phase 1 foundation: the Next.js interface, realtime service skeleton, content schema, validation/import tooling, and CI checks are implemented. Practice and duels are not playable yet. See [the implementation plan](docs/implementation-plan.md) for delivery phases and acceptance criteria, and [foundation decisions](docs/foundation-decisions.md) for defaults and review gates.
+Phase 2 practice is implemented: categories, anonymous sessions, server-validated answers, explanations, results, retry, and refresh/resume. Educational availability still depends on reviewed, published content; the supplied bank remains DRAFT. Multiplayer remains a service skeleton. See [the practice guide](docs/practice.md), [implementation plan](docs/implementation-plan.md), and [foundation decisions](docs/foundation-decisions.md).
 
-Builds, content/domain checks, PostgreSQL integration checks, and HTTP smoke checks passed. See [verification results and limitations](docs/verification.md). Qualified content review and browser/device accessibility QA remain pending.
+See [verification results and limitations](docs/verification.md). Qualified content review, real-device testing, and screen-reader QA remain launch gates.
 
 The supplied requirements extend an earlier specification that is not present in this repository. The plan explicitly marks assumptions that need confirmation before implementing dependent features.
 
@@ -55,9 +55,11 @@ npm run content:import
 npm run dev
 ```
 
-Open http://localhost:3000. The realtime skeleton provides http://localhost:3001/health and rejects gameplay connections until authorized room handling is implemented. The web UI works without PostgreSQL; imports and future quiz features require the database. Run `npm run dev -w @duel/web` for the website alone.
+Open http://localhost:3000. The realtime skeleton provides http://localhost:3001/health and rejects gameplay connections until authorized room handling is implemented. The website shell works without PostgreSQL; imports and practice require the database. Run `npm run dev -w @duel/web` for the website alone.
 
-`DATABASE_URL` is server-only. `WEB_ORIGIN` must exactly match the allowed web origin (no trailing slash). `REALTIME_PORT` defaults to 3001. The root `.env` is loaded by database tools and the realtime service. Never commit a real `.env`. The Compose password is only a local development default; bind the database to loopback and use different secrets in deployment.
+Practice now requires PostgreSQL. To test the full interaction while the traffic questions await review, run `PRACTICE_DEMO=true npm run dev`, then open `/vezbanje` and choose **Tehnička proba**. This opt-in mode uses clearly labeled synthetic questions and is disabled in production. See [the practice guide](docs/practice.md) for details and browser-test setup.
+
+`DATABASE_URL` is server-only. `WEB_ORIGIN` must exactly match the browser origin (no trailing slash); it is required for production practice writes. `REALTIME_PORT` defaults to 3001. The root `.env` is loaded by database tools, the web app, and the realtime service. Never commit a real `.env`. The Compose password is only a local development default; bind the database to loopback and use different secrets in deployment.
 
 ## Checks and content
 
@@ -79,7 +81,7 @@ DATABASE_URL=postgresql://user:password@localhost:5432/duel_test npm run db:migr
 TEST_DATABASE_URL=postgresql://user:password@localhost:5432/duel_test npm run test:db
 ```
 
-Integration checks append isolated fixtures, including immutable published test revisions. Do not point them at a real content database. CI provisions its own disposable PostgreSQL service.
+Integration checks append isolated synthetic fixtures, including immutable published test revisions, and exercise expiry/deletion. Do not point them at a real content database. CI provisions its own disposable PostgreSQL service and also runs Playwright desktop/mobile checks.
 
 The sample bank contains five original draft questions and an original illustration. Drafts are imported for editorial work and are never returned by public question queries. See [the content workflow](content/README.md) for source limitations, review requirements, explicit publishing, and immutable revisions. This foundation is not a reviewed exam preparation product.
 

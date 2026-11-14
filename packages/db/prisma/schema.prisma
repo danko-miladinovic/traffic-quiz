@@ -38,6 +38,7 @@ model Category {
   title           String
   description     String
   questions       QuestionRevision[]
+  attempts        PracticeAttempt[]
   @@unique([localeId, licenceCategory, key])
 }
 
@@ -60,8 +61,65 @@ model QuestionRevision {
   content         Json
   createdAt       DateTime    @default(now())
   options         AnswerOption[]
+  practiceQuestions PracticeQuestion[]
   @@unique([categoryId, key, revision])
   @@index([status, categoryId])
+}
+
+model GuestSession {
+  id          String   @id @default(cuid())
+  tokenHash   String   @unique @db.Char(64)
+  createdAt   DateTime @default(now())
+  lastSeenAt  DateTime @default(now())
+  expiresAt   DateTime
+  attempts    PracticeAttempt[]
+  @@index([expiresAt])
+}
+
+model PracticeAttempt {
+  id            String   @id @default(cuid())
+  guestId       String
+  guest         GuestSession @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  requestId     String   @db.Uuid
+  categoryId    String?
+  category      Category? @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  categoryKey   String
+  categoryTitle String
+  demo          Boolean  @default(false)
+  nextPosition  Int      @default(0)
+  total         Int
+  createdAt     DateTime @default(now())
+  expiresAt     DateTime
+  completedAt   DateTime?
+  questions     PracticeQuestion[]
+  @@unique([guestId, requestId])
+  @@index([guestId, createdAt])
+  @@index([createdAt])
+}
+
+model PracticeQuestion {
+  id                 String   @id @default(cuid())
+  attemptId          String
+  attempt            PracticeAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  questionRevisionId String?
+  questionRevision   QuestionRevision? @relation(fields: [questionRevisionId], references: [id], onDelete: Restrict)
+  position           Int
+  prompt             String
+  options            Json
+  correctOption      String
+  explanation        String
+  sources            Json
+  image              Json?
+  answer             PracticeAnswer?
+  @@unique([attemptId, position])
+}
+
+model PracticeAnswer {
+  questionId  String @id
+  question    PracticeQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  optionKey   String
+  correct     Boolean
+  submittedAt DateTime @default(now())
 }
 
 model AnswerOption {

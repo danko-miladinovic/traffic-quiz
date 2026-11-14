@@ -38,7 +38,7 @@ export default function Home() {
             zna <span>zašto.</span>
           </h1>
           <p className="hero-description">
-            Saobraćajna pravila imaju smisla kada ih razumeš. Uskoro vežbaj svojim tempom i izazovi
+            Saobraćajna pravila imaju smisla kada ih razumeš. Vežbaj svojim tempom, a uskoro izazovi
             prijatelja na duel znanja.
           </p>
           <div className="hero-actions">

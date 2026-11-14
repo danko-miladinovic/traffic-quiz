@@ -1,4 +1,28 @@
-# Phase 1 verification
+# Verification history
+
+## Phase 2 — 2026-11-13
+
+Verified with Node 24.22.2 and a disposable PostgreSQL 18 runtime. Docker is unavailable in this environment; the PostgreSQL 17 Compose/CI service remains configured but was not exercised locally.
+
+| Check                            | Result                                                                                                                                                                                                                                                                                     |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Prisma generation and migrations | Passed; all three committed migrations applied, including practice tables and snapshot/answer update guards                                                                                                                                                                                |
+| Formatting and TypeScript        | Passed for workspaces, test files, and Playwright configuration                                                                                                                                                                                                                            |
+| Domain tests                     | 6 passed, including practice scoring and rejection of forged inputs                                                                                                                                                                                                                        |
+| PostgreSQL tests                 | 10 passed including subtests: publication filtering, concurrent retries, private ownership, frozen revisions, sequential answers, scoring, resume, demo gating, quotas, expiry and cascading cleanup                                                                                       |
+| Browser tests                    | 10 passed across desktop and Pixel-sized Chromium; completion, incorrect feedback, results review, retry, refresh, lost start/answer responses, offline recovery, keyboard focus, cookie privacy, guest isolation, origin rejection, request-size limits, service errors and empty content |
+| Visual checks                    | Inspected desktop and mobile question/result screenshots; mobile flow also passed a horizontal-overflow check                                                                                                                                                                              |
+| Production builds                | Next.js Webpack and realtime skeleton passed; website shell stayed static and practice APIs are dynamic                                                                                                                                                                                    |
+| Production HTTP checks           | Passed on the built server using synthetic published database fixtures: complete practice, stable start replay, scoring, resume, private/no-store responses, guest protection, Secure/HttpOnly/SameSite cookie, and disabled demo despite its environment flag being set                   |
+| Dependency audit                 | npm reported zero known vulnerabilities at installation time                                                                                                                                                                                                                               |
+
+Concurrency checks exposed both ordinary serialization conflicts and PostgreSQL adapter failures at COMMIT. The shared transaction helper now retries these specific conflicts with bounded backoff. Content imports use it too, so concurrent editorial imports do not fail immediately on a retryable conflict.
+
+The original traffic bank was not modified or published. Browser walkthroughs used unrelated synthetic questions; database/production checks used isolated, explicitly marked automated fixtures. No reviewer approval of educational content is claimed.
+
+Browser checks used emulation, not physical phones or a screen reader. Qualified content review, real-device/screen-reader QA, public-host configuration, and operational privacy/backup/log review remain launch gates. CI was updated to run these checks, but no remote GitHub Actions result is claimed. Temporary verification servers were stopped afterward; no site was deployed.
+
+## Phase 1 verification
 
 Verified locally on 2026-11-10 using Node 24.22.2. No hosted environment was provisioned.
 

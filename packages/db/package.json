@@ -4,7 +4,9 @@
   "type": "module",
   "exports": {
     ".": "./src/client.ts",
-    "./content": "./src/content.ts"
+    "./content": "./src/content.ts",
+    "./practice": "./src/practice.ts",
+    "./demo": "./src/demo.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

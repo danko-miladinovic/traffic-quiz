@@ -66,6 +66,8 @@ Acceptance: a clean checkout can run against a local database using documented c
 
 ## Phase 2 — Practice quizzes
 
+Implemented: category selection, guest sessions, frozen revisions and shuffled choices, server validation, sequential answer submission, explanations, results, retry, refresh/resume, typed event hooks, and gameplay retention cleanup. See [practice implementation and testing](practice.md) and [verification results](verification.md). Unit/database tests, 10 desktop/mobile browser scenarios, builds, and production API checks pass. Draft educational content remains unpublished; the development walkthrough uses separate synthetic fixtures. Multiplayer remains phase 3.
+
 - Add category selection, quiz start, answer submission, progress, completion, explanations, and retry.
 - Keep the entire flow anonymous. Provide useful loading, empty, offline, and retry states without duplicating submissions.
 - Freeze question revisions per attempt and validate selected answers on the server.
