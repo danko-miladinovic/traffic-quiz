@@ -1,5 +1,28 @@
 # Verification history
 
+## Phase 3 — 2026-11-15
+
+Verified with Node 24.22.2 and a disposable PostgreSQL 18 runtime. Checks did not use the development database. The PostgreSQL 17 Compose/CI service was not exercised locally.
+
+| Check                            | Result                                                                                                                                                                                                                                                          |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Prisma generation and migrations | Passed; all five migrations applied, including normalized duel state, immutable snapshots/answers, and guest lookup index                                                                                                                                       |
+| Formatting and TypeScript        | Passed across workspaces, test files, and Playwright configuration                                                                                                                                                                                              |
+| Domain tests                     | 11 passed, covering practice and duel scoring, ties, server deadlines, input validation, answer privacy, and reconnection expiry                                                                                                                                |
+| PostgreSQL regression tests      | 10 passed including subtests; practice and content publication behavior remain intact with duel retention cleanup                                                                                                                                               |
+| Realtime integration tests       | 9 passed including subtests; cookie/origin authentication, room authorization, duplicate actions, frozen published revisions, shared rounds, rematches, reconnect deadlines, expiry, restart reconciliation, and exclusive process ownership                    |
+| Concurrent games                 | 20 rooms / 40 clients completed five rounds each; approximately 2.9 seconds total and 219 ms accepted-answer acknowledgement p95 while database regression tests also ran. This is a local baseline, not a hosting capacity guarantee                           |
+| Browser tests                    | 16 passed across desktop and Pixel-sized Chromium: existing practice flows plus QR decoding, independent participants, identical questions/results, room fullness, rematches, refresh/reconnection, interrupted games, and HTTP polling with WebSockets blocked |
+| Visual checks                    | Inspected desktop/mobile invitation and result screenshots; QR contents were decoded and checked against the invitation URL                                                                                                                                     |
+| Production builds                | Next.js Webpack and bundled realtime server passed                                                                                                                                                                                                              |
+| Production HTTP checks           | Passed for the built practice flow, scoring/resume, private responses, secure guest cookie, and disabled development demo                                                                                                                                       |
+| Built realtime checks            | Passed for five shared published-fixture rounds, identical results, guest authentication, and disabled development demo even when its environment flag is set                                                                                                   |
+| Dependency audit                 | npm reported zero known vulnerabilities at installation time                                                                                                                                                                                                    |
+
+All gameplay checks used synthetic demo questions or explicitly marked fixtures in the disposable database. Supplied traffic questions remain unpublished; no reviewer identity or approval was fabricated. CI now includes realtime integration checks, but no remote GitHub Actions result is claimed.
+
+Browser mobile checks used emulation. Physical-phone QR scanning, screen-reader review, public-host WebSocket/proxy behavior, backup/log operations, and qualified educational content review remain launch gates. No site was deployed. Temporary verification services were stopped after checks.
+
 ## Phase 2 — 2026-11-13
 
 Verified with Node 24.22.2 and a disposable PostgreSQL 18 runtime. Docker is unavailable in this environment; the PostgreSQL 17 Compose/CI service remains configured but was not exercised locally.

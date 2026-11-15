@@ -62,6 +62,7 @@ model QuestionRevision {
   createdAt       DateTime    @default(now())
   options         AnswerOption[]
   practiceQuestions PracticeQuestion[]
+  duelQuestions DuelQuestion[]
   @@unique([categoryId, key, revision])
   @@index([status, categoryId])
 }
@@ -73,6 +74,8 @@ model GuestSession {
   lastSeenAt  DateTime @default(now())
   expiresAt   DateTime
   attempts    PracticeAttempt[]
+  createdDuels Duel[] @relation("DuelCreator")
+  duelPlayers DuelPlayer[]
   @@index([expiresAt])
 }
 
@@ -131,4 +134,84 @@ model AnswerOption {
   position   Int
   @@unique([questionId, key])
   @@unique([questionId, position])
+}
+
+enum DuelPhase {
+  WAITING
+  READY
+  ROUND
+  ROUND_RESULT
+  FINISHED
+  EXPIRED
+  ABORTED
+}
+
+model Duel {
+  id                String @id @default(uuid()) @db.Uuid
+  creatorId         String
+  creator           GuestSession @relation("DuelCreator", fields: [creatorId], references: [id], onDelete: Cascade)
+  requestId         String @db.Uuid
+  categoryKey       String
+  categoryTitle     String
+  demo              Boolean @default(false)
+  phase             DuelPhase @default(WAITING)
+  version           Int @default(0)
+  roundIndex        Int @default(-1)
+  rules             Json
+  inviteHash        String? @unique @db.Char(64)
+  inviteExpiresAt   DateTime
+  revealUntil       DateTime?
+  reason            String?
+  nextDuelId        String? @unique @db.Uuid
+  nextDuel          Duel? @relation("DuelRematch", fields: [nextDuelId], references: [id], onDelete: SetNull)
+  previousDuel      Duel? @relation("DuelRematch")
+  createdAt         DateTime @default(now())
+  endedAt           DateTime?
+  players           DuelPlayer[]
+  questions         DuelQuestion[]
+  @@unique([creatorId, requestId])
+  @@index([phase, inviteExpiresAt])
+  @@index([createdAt])
+}
+
+model DuelPlayer {
+  id             String @id @default(cuid())
+  duelId         String @db.Uuid
+  duel           Duel @relation(fields: [duelId], references: [id], onDelete: Cascade)
+  guestId        String
+  guest          GuestSession @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  seat           Int
+  ready          Boolean @default(false)
+  connected      Boolean @default(false)
+  disconnectedAt DateTime?
+  rematchReady   Boolean @default(false)
+  @@unique([duelId, guestId])
+  @@unique([duelId, seat])
+  @@index([guestId])
+}
+
+model DuelQuestion {
+  id                 String @id @db.Uuid
+  duelId             String @db.Uuid
+  duel               Duel @relation(fields: [duelId], references: [id], onDelete: Cascade)
+  questionRevisionId String?
+  questionRevision   QuestionRevision? @relation(fields: [questionRevisionId], references: [id], onDelete: Restrict)
+  position           Int
+  snapshot           Json
+  opensAt            DateTime?
+  deadlineAt         DateTime?
+  closedAt           DateTime?
+  answers            DuelAnswer[]
+  @@unique([duelId, position])
+}
+
+model DuelAnswer {
+  questionId  String @db.Uuid
+  question    DuelQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  seat        Int
+  optionKey   String
+  correct     Boolean
+  elapsedMs   Int
+  receivedAt  DateTime
+  @@id([questionId, seat])
 }

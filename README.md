@@ -4,7 +4,7 @@ A free, mobile-first traffic education app for Serbia, combining practice quizze
 
 ## Project status
 
-Phase 2 practice is implemented: categories, anonymous sessions, server-validated answers, explanations, results, retry, and refresh/resume. Educational availability still depends on reviewed, published content; the supplied bank remains DRAFT. Multiplayer remains a service skeleton. See [the practice guide](docs/practice.md), [implementation plan](docs/implementation-plan.md), and [foundation decisions](docs/foundation-decisions.md).
+Phase 3 private multiplayer is implemented alongside practice: invitation links/QR codes, ready checks, five synchronized questions, server scoring, reconnect grace, results and mutual rematches. Educational availability still depends on reviewed, published content; the supplied bank remains DRAFT. See [the duel guide](docs/duels.md), [practice guide](docs/practice.md), [implementation plan](docs/implementation-plan.md), and [foundation decisions](docs/foundation-decisions.md).
 
 See [verification results and limitations](docs/verification.md). Qualified content review, real-device testing, and screen-reader QA remain launch gates.
 
@@ -55,9 +55,11 @@ npm run content:import
 npm run dev
 ```
 
-Open http://localhost:3000. The realtime skeleton provides http://localhost:3001/health and rejects gameplay connections until authorized room handling is implemented. The website shell works without PostgreSQL; imports and practice require the database. Run `npm run dev -w @duel/web` for the website alone.
+Open http://localhost:3000. The realtime service provides http://localhost:3001/health and authenticates players using the private guest cookie through the website's Socket.IO proxy. The website shell works without PostgreSQL; imports, practice and duels require the database. Run `npm run dev -w @duel/web` for practice alone, or the root `npm run dev` for both services.
 
 Practice now requires PostgreSQL. To test the full interaction while the traffic questions await review, run `PRACTICE_DEMO=true npm run dev`, then open `/vezbanje` and choose **Tehnička proba**. This opt-in mode uses clearly labeled synthetic questions and is disabled in production. See [the practice guide](docs/practice.md) for details and browser-test setup.
+
+For multiplayer, open `/duel`, create a technical-probe room, and open its invitation in a separate browser profile/private window. Both players must mark themselves ready. A second device needs a reachable WEB_ORIGIN instead of localhost; see [phone/QR setup and duel operations](docs/duels.md). Apply the latest migrations before restarting the services.
 
 `DATABASE_URL` is server-only. `WEB_ORIGIN` must exactly match the browser origin (no trailing slash); it is required for production practice writes. `REALTIME_PORT` defaults to 3001. The root `.env` is loaded by database tools, the web app, and the realtime service. Never commit a real `.env`. The Compose password is only a local development default; bind the database to loopback and use different secrets in deployment.
 
@@ -85,4 +87,4 @@ Integration checks append isolated synthetic fixtures, including immutable publi
 
 The sample bank contains five original draft questions and an original illustration. Drafts are imported for editorial work and are never returned by public question queries. See [the content workflow](content/README.md) for source limitations, review requirements, explicit publishing, and immutable revisions. This foundation is not a reviewed exam preparation product.
 
-Production builds use `npm run build`. Start the built web app with `npm run start -w @duel/web` and the realtime skeleton with `npm run start -w @duel/realtime`; keep installed workspaces available. Production hosting, reverse-proxy configuration, and database operations will be completed before public launch.
+Production builds use `npm run build`. Start the built web app with `npm run start -w @duel/web` and the realtime service with `npm run start -w @duel/realtime`; keep installed workspaces available. Configure REALTIME_PORT before the build so the website's rewrite targets the correct port. Only one realtime process may own a database; restarting it aborts unfinished duels without a winner. Production hosting, reverse-proxy configuration, and database operations will be completed before public launch.

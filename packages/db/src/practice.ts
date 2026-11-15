@@ -355,10 +355,18 @@ export async function answerPractice(
 
 export async function cleanupPractice(db: Database, now = new Date()) {
   return db.$transaction(async (tx) => {
+    const duels = await tx.duel.deleteMany({
+      where: {
+        OR: [
+          { createdAt: { lt: new Date(+now - 30 * day) } },
+          { players: { some: { guest: { expiresAt: { lte: now } } } } },
+        ],
+      },
+    });
     const attempts = await tx.practiceAttempt.deleteMany({
       where: { createdAt: { lt: new Date(+now - 30 * day) } },
     });
     const sessions = await tx.guestSession.deleteMany({ where: { expiresAt: { lte: now } } });
-    return { attempts: attempts.count, sessions: sessions.count };
+    return { attempts: attempts.count, sessions: sessions.count, duels: duels.count };
   });
 }

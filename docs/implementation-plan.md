@@ -66,7 +66,7 @@ Acceptance: a clean checkout can run against a local database using documented c
 
 ## Phase 2 — Practice quizzes
 
-Implemented: category selection, guest sessions, frozen revisions and shuffled choices, server validation, sequential answer submission, explanations, results, retry, refresh/resume, typed event hooks, and gameplay retention cleanup. See [practice implementation and testing](practice.md) and [verification results](verification.md). Unit/database tests, 10 desktop/mobile browser scenarios, builds, and production API checks pass. Draft educational content remains unpublished; the development walkthrough uses separate synthetic fixtures. Multiplayer remains phase 3.
+Implemented: category selection, guest sessions, frozen revisions and shuffled choices, server validation, sequential answer submission, explanations, results, retry, refresh/resume, typed event hooks, and gameplay retention cleanup. See [practice implementation and testing](practice.md) and [verification results](verification.md). Unit/database tests, 10 desktop/mobile browser scenarios, builds, and production API checks pass. Draft educational content remains unpublished; the development walkthrough uses separate synthetic fixtures. Multiplayer is implemented in phase 3 below.
 
 - Add category selection, quiz start, answer submission, progress, completion, explanations, and retry.
 - Keep the entire flow anonymous. Provide useful loading, empty, offline, and retry states without duplicating submissions.
@@ -76,6 +76,8 @@ Implemented: category selection, guest sessions, frozen revisions and shuffled c
 Acceptance: a visitor completes a quiz on a phone without registration, sees accurate explanations and results, and can retry. Automated checks cover answer validation, scoring, duplicate submissions, and attempt completion; keyboard and screen-reader checks cover the core flow.
 
 ## Phase 3 — Private multiplayer duels
+
+Implemented: private link/QR invitations, two-player ready checks, identical frozen questions/options, synchronized timed rounds, simultaneous reveal, server scoring, reconnect grace without deadline resets, results, mutual rematches, cancellation, durable records, restart reconciliation, ownership locking, retention and abuse limits. See [duel implementation and operations](duels.md). The draft bank remains unpublished; development uses separate synthetic questions. Validation results are recorded in [verification history](verification.md).
 
 - Create an expiring room, copyable invitation URL, locally generated QR code, waiting room, and two-player ready state. The URL must also work without scanning a QR code.
 - Implement server states: waiting, ready, active round, round result, finished, expired, and aborted.

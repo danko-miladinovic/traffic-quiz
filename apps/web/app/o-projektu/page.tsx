@@ -16,7 +16,7 @@ export default function About() {
       </p>
       <h2>Gde smo sada?</h2>
       <p>
-        Vežbanje po oblastima je spremno za objavljena pitanja, a dueli su u pripremi. Pitanja su
+        Vežbanje po oblastima i privatni dueli su spremni za objavljena pitanja. Pitanja su
         originalni obrazovni primeri, a ne zvanična ispitna baza. Dostupna su za vežbanje tek nakon
         stručne provere i objavljivanja.
       </p>
@@ -28,10 +28,11 @@ export default function About() {
       <h2>Privatnost u ovoj verziji</h2>
       <p>
         Aplikacija ne uključuje analitiku, oglase ni korisničke naloge. Kada započneš vežbanje,
-        koristimo privatni kolačić sesije da sačuvamo tvoje odgovore i omogućimo nastavak u istom
-        pregledaču. Ne tražimo ime ni imejl. Sesija ističe posle 30 dana neaktivnosti, a pokušaji se
-        brišu nakon 30 dana kroz periodično čišćenje. Aktivno vežbanje može da se nastavi u roku od
-        24 sata. Kolačić nije namenjen praćenju niti oglašavanju.
+        koristimo privatni kolačić sesije da sačuvamo tvoje odgovore, mesto u duelu i omogućimo
+        nastavak u istom pregledaču. Ne tražimo ime ni imejl. Sesija ističe posle 30 dana
+        neaktivnosti, a pokušaji i zapisi duela se brišu nakon 30 dana kroz periodično čišćenje.
+        Aktivno vežbanje može da se nastavi u roku od 24 sata. Kolačić nije namenjen praćenju niti
+        oglašavanju.
       </p>
       <p>
         Server i pružalac hostinga mogu obrađivati tehničke podatke o zahtevima. Pre javnog

@@ -39,6 +39,7 @@ jobs:
       - run: npm run content:import
       - run: npm run content:import
       - run: npm run test:db
+      - run: npm run test:realtime
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - run: npm run build

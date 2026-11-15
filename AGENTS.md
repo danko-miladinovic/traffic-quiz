@@ -1,6 +1,6 @@
 # Project guidance
 
-Read README.md, docs/implementation-plan.md, docs/foundation-decisions.md, and docs/practice.md before changing the application. Practice is implemented; multiplayer gameplay remains unimplemented.
+Read README.md, docs/implementation-plan.md, docs/foundation-decisions.md, docs/practice.md, and docs/duels.md before changing the application. Practice and private multiplayer are implemented; educational pages/SEO are the next phase.
 
 ## Product constraints
 
@@ -33,3 +33,7 @@ Read README.md, docs/implementation-plan.md, docs/foundation-decisions.md, and d
 - Use the opt-in, development-only synthetic walkthrough to preview practice; never expose the draft educational bank or enable demo attempts in production.
 - Keep guest credentials HttpOnly and hashed at rest. Authorize every attempt read/write by guest, preserve frozen question/option order, and keep submissions idempotent. Never send unrevealed answer keys to the browser.
 - Browser tests require TEST_DATABASE_URL and start their own dev server. Run npm run test:e2e after gameplay UI changes; keep desktop/mobile, keyboard, resume, and network-recovery coverage meaningful.
+- Run npm run test:realtime with a disposable TEST_DATABASE_URL for duel changes. Browser tests now own ports 3310/3311 and start both services.
+- Never serialize internal DuelGame objects. Keep correctness hidden until the shared reveal, authenticate every action by guest cookie, and preserve server receipt timestamps across queues/retries.
+- Preserve the single realtime ownership lock before reconciliation. Do not restore interrupted games as finished or declare a winner after a failed reconnect. Adding replicas requires an explicit coordination redesign.
+- Keep invitation tokens in URL fragments and server memory; persist only their hash. Keep Socket.IO's trailing-slash proxy and both transport paths working when changing routing.

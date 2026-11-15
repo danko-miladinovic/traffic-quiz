@@ -6,7 +6,8 @@
     ".": "./src/client.ts",
     "./content": "./src/content.ts",
     "./practice": "./src/practice.ts",
-    "./demo": "./src/demo.ts"
+    "./demo": "./src/demo.ts",
+    "./duel": "./src/duel.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
@@ -14,6 +15,10 @@
   "dependencies": {
     "@duel/domain": "*",
     "@prisma/adapter-pg": "^7.0.0",
-    "@prisma/client": "^7.0.0"
+    "@prisma/client": "^7.0.0",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.0"
   }
 }

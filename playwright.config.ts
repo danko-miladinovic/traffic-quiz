@@ -18,16 +18,34 @@ export default defineConfig({
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },
     { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
-  webServer: {
-    command: "npm run dev -w @duel/web -- --port 3310",
-    url: baseURL,
-    reuseExistingServer: false,
-    timeout: 120_000,
-    env: {
-      DATABASE_URL: process.env.TEST_DATABASE_URL,
-      WEB_ORIGIN: baseURL,
-      PRACTICE_DEMO: "true",
-      NEXT_TELEMETRY_DISABLED: "1",
+  webServer: [
+    {
+      command: "npm run dev -w @duel/web -- --port 3310",
+      url: baseURL,
+      reuseExistingServer: false,
+      timeout: 120_000,
+      env: {
+        DATABASE_URL: process.env.TEST_DATABASE_URL,
+        WEB_ORIGIN: baseURL,
+        PRACTICE_DEMO: "true",
+        NEXT_TELEMETRY_DISABLED: "1",
+        REALTIME_PORT: "3311",
+      },
     },
-  },
+    {
+      command: "npm run dev -w @duel/realtime",
+      url: "http://127.0.0.1:3311/health",
+      reuseExistingServer: false,
+      timeout: 60_000,
+      env: {
+        DATABASE_URL: process.env.TEST_DATABASE_URL,
+        WEB_ORIGIN: baseURL,
+        REALTIME_PORT: "3311",
+        PRACTICE_DEMO: "true",
+        DUEL_QUESTION_SECONDS: "20",
+        DUEL_REVEAL_SECONDS: "2",
+        DUEL_RECONNECT_SECONDS: "5",
+      },
+    },
+  ],
 });

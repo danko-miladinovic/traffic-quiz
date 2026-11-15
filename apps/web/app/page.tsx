@@ -38,7 +38,7 @@ export default function Home() {
             zna <span>zašto.</span>
           </h1>
           <p className="hero-description">
-            Saobraćajna pravila imaju smisla kada ih razumeš. Vežbaj svojim tempom, a uskoro izazovi
+            Saobraćajna pravila imaju smisla kada ih razumeš. Vežbaj svojim tempom i izazovi
             prijatelja na duel znanja.
           </p>
           <div className="hero-actions">
@@ -98,7 +98,7 @@ export default function Home() {
           <p>
             <span aria-hidden="true">⇄</span> Izazovi prijatelja
           </p>
-          <span className="small-label">USKORO NA TVOM EKRANU</span>
+          <span className="small-label">BESPLATNO · BEZ NALOGA</span>
         </div>
       </div>
       <section className="container topics" aria-labelledby="topics-title">

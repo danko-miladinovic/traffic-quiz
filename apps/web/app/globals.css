@@ -1212,3 +1212,190 @@ label.practice-option:hover {
     text-align: left;
   }
 }
+
+/* Private duels share the practice reading layout and native answer controls. */
+.duel-workspace {
+  max-width: 900px;
+  margin-inline: auto;
+}
+.duel-connection {
+  font-size: 12px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+.status-offline {
+  background: #ae643c;
+}
+.duel-scoreboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-block: 24px;
+}
+.duel-scoreboard > div {
+  background: #eef1e6;
+  border: 1px solid var(--line);
+  padding: 20px;
+  border-radius: 10px;
+  display: grid;
+  gap: 8px;
+}
+.duel-scoreboard > .duel-self {
+  background: #e7efda;
+  border-color: #bdcfa9;
+}
+.duel-scoreboard span {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.duel-scoreboard strong {
+  font-size: 38px;
+  line-height: 1.1;
+  font-weight: 500;
+}
+.duel-scoreboard small {
+  font-size: 18px;
+  color: var(--muted);
+}
+.duel-invitation {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  padding-block: 12px 24px;
+}
+.duel-invitation label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.duel-invitation input {
+  display: block;
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 6px;
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  color: var(--ink);
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+.duel-invitation input:focus-visible {
+  outline: 3px solid #286bdb;
+  outline-offset: 3px;
+}
+.duel-invitation p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.duel-qr img {
+  display: block;
+  width: 240px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.duel-rules {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+  padding-block: 15px;
+  border-block: 1px solid var(--line);
+}
+.duel-ready-list {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-block: 22px;
+}
+.duel-ready-list p {
+  font-size: 13px;
+  margin: 0;
+}
+.duel-ready-list strong {
+  font-weight: 600;
+}
+.duel-round-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: start;
+}
+.duel-timer {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #e7efda;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.duel-timer-urgent {
+  background: #f5e3d8;
+  color: #954028;
+}
+.duel-answer-status {
+  font-size: 14px;
+  line-height: 1.8;
+  padding: 16px;
+  background: #edf3e4;
+  border-radius: 8px;
+}
+.duel-reconnect {
+  border: 1px solid #d4ac81;
+  background: #fff2e5;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.duel-round-answers {
+  border-block: 1px solid var(--line);
+  margin-block: 15px;
+  padding-block: 8px;
+}
+.duel-lobby .text-link {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ink);
+  padding: 12px 0;
+  min-height: 44px;
+}
+.duel-page fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-width: 0;
+}
+@media (max-width: 700px) {
+  .duel-invitation {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .duel-qr {
+    justify-self: center;
+  }
+  .duel-scoreboard > div {
+    padding: 15px;
+  }
+  .duel-scoreboard span {
+    font-size: 10px;
+  }
+  .duel-ready-list {
+    gap: 12px;
+  }
+  .duel-timer {
+    font-size: 14px;
+  }
+  .duel-round-heading .eyebrow {
+    font-size: 9px;
+  }
+}

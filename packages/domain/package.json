@@ -5,7 +5,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./env": "./src/env.ts",
-    "./practice": "./src/practice.ts"
+    "./practice": "./src/practice.ts",
+    "./duel": "./src/duel.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
