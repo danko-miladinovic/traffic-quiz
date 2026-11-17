@@ -6,7 +6,8 @@
     ".": "./src/index.ts",
     "./env": "./src/env.ts",
     "./practice": "./src/practice.ts",
-    "./duel": "./src/duel.ts"
+    "./duel": "./src/duel.ts",
+    "./education": "./src/education.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

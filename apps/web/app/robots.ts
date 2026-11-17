@@ -1,5 +1,5 @@
-import type { MetadataRoute } from "next";
-
-export default function robots(): MetadataRoute.Robots {
-  return { rules: { userAgent: "*", disallow: "/" } };
+import { lessons } from "../lib/education";
+import { robotsPolicy } from "../lib/seo";
+export default function robots() {
+  return robotsPolicy(lessons.length > 0);
 }

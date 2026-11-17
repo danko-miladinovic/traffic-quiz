@@ -308,6 +308,7 @@ export function Practice() {
               <article
                 className={`practice-category ${category.demo ? "practice-category-demo" : ""}`}
                 key={category.key}
+                id={`oblast-${category.key}`}
               >
                 <span className="topic-number">/{String(index + 1).padStart(2, "0")}</span>
                 <p className="eyebrow">

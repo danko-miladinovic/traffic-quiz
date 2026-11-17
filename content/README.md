@@ -31,3 +31,7 @@ The flag acknowledges the publication action; it cannot verify a person's qualif
 Published revisions and their answer options are protected from changes/deletion by database triggers and import checks. To correct published material, increment `revision`, set the new revision to DRAFT, review, then publish it. Public selection chooses the newest published revision of each question. If urgent withdrawal is needed, design a separate audited availability mechanism before public launch; do not edit historical answers or disable database protections.
 
 New content banks require deliberate schema changes to the current RS/B/Serbian-Latin validator; the database already separates jurisdictions and locales. Adding a country requires its own sources and review, not just translation.
+
+## Lessons
+
+The separate `lessons/rs-b.sr-Latn.json` bank contains five original study-method drafts. They remain unpublished and require editorial expansion and qualified review. `npm run lessons:validate` checks their structure; `content:validate` includes this check. Question imports do not publish lessons. See [the lesson publication workflow](../docs/education.md) for review evidence, sources, corrections, build-time publication and search controls.

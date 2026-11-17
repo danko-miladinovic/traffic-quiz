@@ -29,6 +29,8 @@ export default defineConfig({
         WEB_ORIGIN: baseURL,
         PRACTICE_DEMO: "true",
         NEXT_TELEMETRY_DISABLED: "1",
+        SEARCH_INDEXING_ENABLED: "false",
+        SITE_URL: baseURL,
         REALTIME_PORT: "3311",
       },
     },

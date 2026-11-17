@@ -1,6 +1,6 @@
 # Project guidance
 
-Read README.md, docs/implementation-plan.md, docs/foundation-decisions.md, docs/practice.md, and docs/duels.md before changing the application. Practice and private multiplayer are implemented; educational pages/SEO are the next phase.
+Read README.md, docs/implementation-plan.md, docs/foundation-decisions.md, docs/practice.md, docs/duels.md, and docs/education.md before changing the application. Practice, private multiplayer, and educational routing/SEO are implemented; lesson publication awaits qualified review. Analytics is the next implementation phase.
 
 ## Product constraints
 
@@ -37,3 +37,5 @@ Read README.md, docs/implementation-plan.md, docs/foundation-decisions.md, docs/
 - Never serialize internal DuelGame objects. Keep correctness hidden until the shared reveal, authenticate every action by guest cookie, and preserve server receipt timestamps across queues/retries.
 - Preserve the single realtime ownership lock before reconciliation. Do not restore interrupted games as finished or declare a winner after a failed reconnect. Adding replicas requires an explicit coordination redesign.
 - Keep invitation tokens in URL fragments and server memory; persist only their hash. Keep Socket.IO's trailing-slash proxy and both transport paths working when changing routing.
+
+- Keep lesson drafts out of public routes, props, related links and sitemaps. Never fabricate review evidence or enable search indexing as a shortcut to publication. Run npm run test:education for editorial/SEO changes.

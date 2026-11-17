@@ -1,8 +1,18 @@
 import Link from "next/link";
+import { lessons } from "../lib/education";
+import { publicMetadata } from "../lib/seo";
+
+export const metadata = publicMetadata(
+  "Saobraćajni Duel — učenje i besplatno vežbanje",
+  "Uči saobraćajna pravila za Srbiju po oblastima, vežbaj bez naloga i pozovi prijatelja na duel. Lekcije i pitanja objavljujemo nakon stručne provere.",
+  "/",
+  lessons.length > 0,
+);
 
 const topics = [
   {
     number: "01",
+    slug: "saobracajni-znakovi",
     icon: "△",
     title: "Saobraćajni znakovi",
     text: "Prepoznaj znak. Razumi poruku.",
@@ -10,6 +20,7 @@ const topics = [
   },
   {
     number: "02",
+    slug: "prvenstvo-prolaza",
     icon: "↱",
     title: "Prvenstvo prolaza",
     text: "Ko prolazi prvi? Razjasni dileme.",
@@ -17,9 +28,10 @@ const topics = [
   },
   {
     number: "03",
+    slug: "raskrsnice",
     icon: "◎",
-    title: "Bezbedna vožnja",
-    text: "Male navike. Velika razlika.",
+    title: "Raskrsnice",
+    text: "Pročitaj prikaz. Poveži putanje.",
     tag: "Pravila i ponašanje",
   },
 ];
@@ -110,7 +122,7 @@ export default function Home() {
           <p>
             Tri oblasti za dobar početak.
             <br />
-            Pitanja i objašnjenja su u pripremi.
+            Lekcije objavljujemo posle stručne provere.
           </p>
         </div>
         <div className="topic-grid">
@@ -125,9 +137,9 @@ export default function Home() {
               <p className="topic-tag">{topic.tag}</p>
               <h3>{topic.title}</h3>
               <p>{topic.text}</p>
-              <span className="topic-status">
-                U pripremi <span aria-hidden="true">↗</span>
-              </span>
+              <Link className="topic-status" href={`/ucenje/oblasti/${topic.slug}`}>
+                Istraži oblast <span aria-hidden="true">↗</span>
+              </Link>
             </article>
           ))}
         </div>

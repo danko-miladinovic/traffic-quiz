@@ -22,9 +22,11 @@
     "db:generate": "prisma generate --config packages/db/prisma.config.ts",
     "db:migrate": "prisma migrate deploy --config packages/db/prisma.config.ts",
     "db:dev": "prisma migrate dev --config packages/db/prisma.config.ts",
-    "content:validate": "tsx packages/db/src/import.ts --validate",
+    "content:validate": "tsx packages/db/src/import.ts --validate && npm run lessons:validate",
     "content:import": "tsx --env-file-if-exists=.env packages/db/src/import.ts",
-    "data:cleanup": "tsx --env-file-if-exists=.env packages/db/src/cleanup.ts"
+    "data:cleanup": "tsx --env-file-if-exists=.env packages/db/src/cleanup.ts",
+    "test:education": "tsx --tsconfig apps/web/tsconfig.json --test apps/web/lib/education.test.tsx",
+    "lessons:validate": "tsx scripts/validate-lessons.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.0",

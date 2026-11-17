@@ -90,6 +90,8 @@ Acceptance: two browsers can join by QR/link, answer the same five questions, an
 
 ## Phase 4 — Educational pages and SEO
 
+Implemented infrastructure: server-rendered learning hub, five category routes, published-only lesson routes, table of contents, sources/review details, related reading and practice links, validated file-based editorial workflow, unique metadata, canonical URLs, social image, Article/BreadcrumbList data, and publication-aware sitemap/robots controls. See [educational implementation and publication](education.md). Five original study-method drafts remain unpublished pending expansion and qualified review; no approved traffic-rule lessons were available. Search indexing remains disabled. Technical delivery does not complete the reviewed-content/public-launch acceptance gate below.
+
 - Publish homepage, category pages, and reviewed lessons for signs, right of way, intersection scenarios, exam preparation, and common mistakes.
 - Use descriptive localized URLs, unique titles/descriptions, semantic headings, canonical URLs, sitemap, robots configuration, and relevant social preview metadata.
 - Render useful lesson content in initial HTML. Link lessons to related lessons and quizzes. Keep private room and result URLs out of search indexes and sitemaps.

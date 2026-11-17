@@ -1,0 +1,248 @@
+{
+  "jurisdiction": "RS",
+  "locale": "sr-Latn-RS",
+  "script": "Latn",
+  "licenceCategory": "B",
+  "categories": [
+    {
+      "slug": "saobracajni-znakovi",
+      "title": "Saobraćajni znakovi",
+      "description": "Uči značenje znakova kroz njihovu poruku i okolnosti u kojima ih srećeš.",
+      "practiceCategory": "signalizacija"
+    },
+    {
+      "slug": "prvenstvo-prolaza",
+      "title": "Prvenstvo prolaza",
+      "description": "Poveži učesnike, pravce kretanja i signalizaciju pre razmatranja redosleda prolaska.",
+      "practiceCategory": "prvenstvo"
+    },
+    {
+      "slug": "raskrsnice",
+      "title": "Raskrsnice",
+      "description": "Razloži prikaz raskrsnice na putanje i važne detalje, korak po korak."
+    },
+    {
+      "slug": "priprema-ispita",
+      "title": "Priprema ispita",
+      "description": "Organizuj ponavljanje po oblastima i prati objašnjenja koja treba ponovo pročitati."
+    },
+    {
+      "slug": "najcesce-greske",
+      "title": "Najčešće greške",
+      "description": "Koristi pogrešan odgovor kao polazište za razumevanje i sledeću vežbu."
+    }
+  ],
+  "lessons": [
+    {
+      "slug": "kako-uciti-saobracajne-znakove",
+      "category": "saobracajni-znakovi",
+      "revision": 1,
+      "title": "Kako učiti saobraćajne znakove sa razumevanjem",
+      "description": "Posmatraj poruku znaka i kontekst, zatim proveri svoje objašnjenje. Nacrt lekcije za oblast saobraćajnih znakova.",
+      "summary": "Prepoznavanje crteža je početak, ali nije celo objašnjenje. Pri učenju zapiši šta misliš da znak poručuje, kome je namenjen i koji detalj na slici podržava tvoj zaključak.",
+      "updatedOn": "2026-11-15",
+      "sections": [
+        {
+          "id": "poruka",
+          "title": "Od prepoznavanja do značenja",
+          "paragraphs": [
+            "Prepoznavanje crteža je početak, ali nije celo objašnjenje. Pri učenju zapiši šta misliš da znak poručuje, kome je namenjen i koji detalj na slici podržava tvoj zaključak.",
+            "Zatim uporedi svoje reči sa proverenim nastavnim materijalom. Ako si zapamtio samo naziv, vrati se na njegovo značenje umesto da ponavljaš isti crtež bez objašnjenja."
+          ]
+        },
+        {
+          "id": "kontekst",
+          "title": "Proveri kontekst",
+          "paragraphs": [
+            "Dva slična prikaza uporedi jedan pored drugog. Zabeleži koje okolnosti su iste, a šta je promenjeno. Ne izvodi zaključak iz boje ili oblika bez provere punog značenja znaka."
+          ]
+        }
+      ],
+      "related": ["kako-analizirati-prvenstvo-prolaza"],
+      "sources": [
+        {
+          "title": "Zakon o bezbednosti saobraćaja na putevima — izdanje na sajtu Puteva Srbije",
+          "url": "https://www.putevi-srbije.rs/images/pdf/regulativa/Zakon-o-bezbednosti-saobracaja-na-putevima-19-25.pdf",
+          "reference": "Urednička polazna referenca, izdanje sa 19/2025; proveriti važeći tekst i dodati precizne izvore pre objavljivanja.",
+          "accessedOn": "2026-11-15"
+        }
+      ],
+      "rights": {
+        "license": "PROJECT-ORIGINAL",
+        "attribution": "Saobraćajni Duel — originalni nacrt za stručnu proveru",
+        "original": true
+      },
+      "review": {
+        "status": "DRAFT"
+      }
+    },
+    {
+      "slug": "kako-analizirati-prvenstvo-prolaza",
+      "category": "prvenstvo-prolaza",
+      "revision": 1,
+      "title": "Kako analizirati pitanje o prvenstvu prolaza",
+      "description": "Odvoji ono što vidiš od svojih pretpostavki i objasni svaki korak. Nacrt lekcije o učenju prvenstva prolaza.",
+      "summary": "Pre nego što odabereš redosled, prepričaj zadatak. Nabroj učesnike, njihove namere i prikazanu signalizaciju. Razlikuj podatak koji zaista vidiš od pretpostavke koju si sam dodao.",
+      "updatedOn": "2026-11-15",
+      "sections": [
+        {
+          "id": "podaci",
+          "title": "Najpre prikupi podatke",
+          "paragraphs": [
+            "Pre nego što odabereš redosled, prepričaj zadatak. Nabroj učesnike, njihove namere i prikazanu signalizaciju. Razlikuj podatak koji zaista vidiš od pretpostavke koju si sam dodao."
+          ]
+        },
+        {
+          "id": "obrazlozenje",
+          "title": "Obrazloži izbor",
+          "paragraphs": [
+            "Za svoj odgovor napiši jedno celovito objašnjenje. Pozovi se na konkretan detalj zadatka i provereni izvor. Ako objašnjenje zavisi od podatka koji nedostaje, zabeleži pitanje za instruktora umesto nagađanja."
+          ]
+        }
+      ],
+      "related": ["citanje-prikaza-raskrsnice"],
+      "sources": [
+        {
+          "title": "Zakon o bezbednosti saobraćaja na putevima — izdanje na sajtu Puteva Srbije",
+          "url": "https://www.putevi-srbije.rs/images/pdf/regulativa/Zakon-o-bezbednosti-saobracaja-na-putevima-19-25.pdf",
+          "reference": "Urednička polazna referenca, izdanje sa 19/2025; proveriti važeći tekst i dodati precizne izvore pre objavljivanja.",
+          "accessedOn": "2026-11-15"
+        }
+      ],
+      "rights": {
+        "license": "PROJECT-ORIGINAL",
+        "attribution": "Saobraćajni Duel — originalni nacrt za stručnu proveru",
+        "original": true
+      },
+      "review": {
+        "status": "DRAFT"
+      }
+    },
+    {
+      "slug": "citanje-prikaza-raskrsnice",
+      "category": "raskrsnice",
+      "revision": 1,
+      "title": "Kako čitati prikaz raskrsnice",
+      "description": "Prati učesnike i njihove namere pre rešavanja situacije. Nacrt lekcije o čitanju ilustracija raskrsnica.",
+      "summary": "Na crtežu prati jednog učesnika od početnog položaja do označenog odredišta. Ponovi postupak za ostale. Tako možeš da proveriš da li si dobro pročitao strelice pre razmišljanja o konačnom odgovoru.",
+      "updatedOn": "2026-11-15",
+      "sections": [
+        {
+          "id": "putanje",
+          "title": "Prati jednu putanju odjednom",
+          "paragraphs": [
+            "Na crtežu prati jednog učesnika od početnog položaja do označenog odredišta. Ponovi postupak za ostale. Tako možeš da proveriš da li si dobro pročitao strelice pre razmišljanja o konačnom odgovoru."
+          ]
+        },
+        {
+          "id": "nejasnoce",
+          "title": "Prepoznaj nejasnoću",
+          "paragraphs": [
+            "Crtež je pojednostavljen prikaz situacije. Ako ne možeš da razaznaš signal, smer ili položaj, nemoj dopunjavati sliku po sećanju. Zapiši šta je nejasno i traži objašnjenje uz izvorni prikaz."
+          ]
+        }
+      ],
+      "related": ["plan-ponavljanja-za-ispit"],
+      "sources": [
+        {
+          "title": "Zakon o bezbednosti saobraćaja na putevima — izdanje na sajtu Puteva Srbije",
+          "url": "https://www.putevi-srbije.rs/images/pdf/regulativa/Zakon-o-bezbednosti-saobracaja-na-putevima-19-25.pdf",
+          "reference": "Urednička polazna referenca, izdanje sa 19/2025; proveriti važeći tekst i dodati precizne izvore pre objavljivanja.",
+          "accessedOn": "2026-11-15"
+        }
+      ],
+      "rights": {
+        "license": "PROJECT-ORIGINAL",
+        "attribution": "Saobraćajni Duel — originalni nacrt za stručnu proveru",
+        "original": true
+      },
+      "review": {
+        "status": "DRAFT"
+      }
+    },
+    {
+      "slug": "plan-ponavljanja-za-ispit",
+      "category": "priprema-ispita",
+      "revision": 1,
+      "title": "Napravi plan ponavljanja za teorijski ispit",
+      "description": "Podeli gradivo na oblasti i vraćaj se objašnjenjima. Nacrt lekcije o organizaciji učenja za B kategoriju u Srbiji.",
+      "summary": "Odaberi jednu oblast i postavi sebi mali cilj: da svojim rečima objasniš temu, pa tek onda proveriš odgovore. Odvoji vreme za čitanje, vežbu i pregled nedoumica umesto da gledaš samo ukupan rezultat.",
+      "updatedOn": "2026-11-15",
+      "sections": [
+        {
+          "id": "plan",
+          "title": "Uči u manjim celinama",
+          "paragraphs": [
+            "Odaberi jednu oblast i postavi sebi mali cilj: da svojim rečima objasniš temu, pa tek onda proveriš odgovore. Odvoji vreme za čitanje, vežbu i pregled nedoumica umesto da gledaš samo ukupan rezultat."
+          ]
+        },
+        {
+          "id": "provera",
+          "title": "Rezultat koristi kao smernicu",
+          "paragraphs": [
+            "Posle vežbe odvoji pitanja koja razumeš od onih gde si pogodio. Vrati se objašnjenjima i razgovaraj sa instruktorom o nedoumicama. Rezultat u ovoj aplikaciji nije potvrda spremnosti za zvanični ispit niti zamena za obuku."
+          ]
+        }
+      ],
+      "related": ["kako-uciti-iz-pogresnog-odgovora"],
+      "sources": [
+        {
+          "title": "Zakon o bezbednosti saobraćaja na putevima — izdanje na sajtu Puteva Srbije",
+          "url": "https://www.putevi-srbije.rs/images/pdf/regulativa/Zakon-o-bezbednosti-saobracaja-na-putevima-19-25.pdf",
+          "reference": "Urednička polazna referenca, izdanje sa 19/2025; proveriti važeći tekst i dodati precizne izvore pre objavljivanja.",
+          "accessedOn": "2026-11-15"
+        }
+      ],
+      "rights": {
+        "license": "PROJECT-ORIGINAL",
+        "attribution": "Saobraćajni Duel — originalni nacrt za stručnu proveru",
+        "original": true
+      },
+      "review": {
+        "status": "DRAFT"
+      }
+    },
+    {
+      "slug": "kako-uciti-iz-pogresnog-odgovora",
+      "category": "najcesce-greske",
+      "revision": 1,
+      "title": "Kako učiti iz pogrešnog odgovora",
+      "description": "Razlikuj previd, nerazumevanje i nagađanje pa smisleno ponovi oblast. Nacrt lekcije o pregledu sopstvenih grešaka.",
+      "summary": "Pre čitanja rešenja zapiši kako si razmišljao. Da li si propustio detalj, pomešao značenje ili izabrao nasumično? Ova razlika pomaže da sledeći korak bude koristan, umesto da samo zapamtiš položaj odgovora.",
+      "updatedOn": "2026-11-15",
+      "sections": [
+        {
+          "id": "uzrok",
+          "title": "Pronađi uzrok greške",
+          "paragraphs": [
+            "Pre čitanja rešenja zapiši kako si razmišljao. Da li si propustio detalj, pomešao značenje ili izabrao nasumično? Ova razlika pomaže da sledeći korak bude koristan, umesto da samo zapamtiš položaj odgovora."
+          ]
+        },
+        {
+          "id": "ponavljanje",
+          "title": "Proveri novo objašnjenje",
+          "paragraphs": [
+            "Posle čitanja objašnjenja zatvori rešenje i prepričaj ga svojim rečima. Pri ponovnom pokušaju proveri razlog izbora, jer redosled ponuđenih odgovora može biti drugačiji. Nedoumice sačuvaj za razgovor sa instruktorom."
+          ]
+        }
+      ],
+      "related": ["kako-uciti-saobracajne-znakove"],
+      "sources": [
+        {
+          "title": "Zakon o bezbednosti saobraćaja na putevima — izdanje na sajtu Puteva Srbije",
+          "url": "https://www.putevi-srbije.rs/images/pdf/regulativa/Zakon-o-bezbednosti-saobracaja-na-putevima-19-25.pdf",
+          "reference": "Urednička polazna referenca, izdanje sa 19/2025; proveriti važeći tekst i dodati precizne izvore pre objavljivanja.",
+          "accessedOn": "2026-11-15"
+        }
+      ],
+      "rights": {
+        "license": "PROJECT-ORIGINAL",
+        "attribution": "Saobraćajni Duel — originalni nacrt za stručnu proveru",
+        "original": true
+      },
+      "review": {
+        "status": "DRAFT"
+      }
+    }
+  ]
+}
