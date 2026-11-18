@@ -1,3 +1,4 @@
+import { analyticsFlag } from "@duel/domain/analytics";
 import { answerPractice } from "@duel/db/practice";
 import {
   attemptId,
@@ -20,7 +21,7 @@ export async function POST(request: Request, context: { params: Promise<{ id: st
           await guestHash(),
           await attemptId(context),
           await body(request),
-          { allowDemo: demoEnabled() },
+          { allowDemo: demoEnabled(), analytics: analyticsFlag(process.env.ANALYTICS_ENABLED) },
         ),
       ),
     true,

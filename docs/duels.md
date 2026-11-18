@@ -76,6 +76,10 @@ Gameplay cleanup now includes duels older than 30 days and duels involving expir
 
 For production, run the built Next.js application and the built realtime process persistently behind an HTTPS reverse proxy. Keep the same database and WEB_ORIGIN, configure WebSocket upgrade forwarding and adequate polling timeouts, and retain the `/socket.io/` route. The realtime build bundles workspace TypeScript but keeps external dependencies installed. Running a second replica requires a new shared-coordination design; a Socket.IO adapter alone would not distribute the game state or timers.
 
+## Optional analytics
+
+Phase 5 adds first-party analytics, disabled by default. Only consented actions are recorded; room lifecycle counts are deduplicated and aborted games never become completion events. No invitation secret, question content or choice enters telemetry. See [analytics consent, authority and reporting](analytics.md).
+
 ## Verification
 
 Use a disposable migrated database, never the development/production content database:

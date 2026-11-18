@@ -7,7 +7,8 @@
     "./content": "./src/content.ts",
     "./practice": "./src/practice.ts",
     "./demo": "./src/demo.ts",
-    "./duel": "./src/duel.ts"
+    "./duel": "./src/duel.ts",
+    "./analytics": "./src/analytics.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

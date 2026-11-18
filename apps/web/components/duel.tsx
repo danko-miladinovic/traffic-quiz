@@ -7,6 +7,7 @@ import QRCode from "qrcode";
 import type { DuelAction, DuelReply, DuelRoundFeedback, DuelView } from "@duel/domain/duel";
 import type { PracticeCategory } from "@duel/domain/practice";
 import { Button } from "./button";
+import { trackInvitation } from "../lib/analytics-client";
 
 const roomKey = "duel.multiplayer.room";
 const intentKey = "duel.multiplayer.intent";
@@ -375,6 +376,7 @@ export function Duel() {
     try {
       if (!navigator.clipboard) throw new Error();
       await navigator.clipboard.writeText(inviteUrl);
+      if (game) trackInvitation(game.id, "copy");
       setCopyNotice("Link je kopiran.");
     } catch {
       linkInput.current?.select();
@@ -392,6 +394,7 @@ export function Duel() {
         text: "Izazivam te na duel znanja!",
         url: inviteUrl,
       });
+      if (game) trackInvitation(game.id, "share");
     } catch (failure) {
       if (!(failure instanceof Error) || failure.name !== "AbortError")
         setCopyNotice("Deljenje nije uspelo. Kopiraj link.");

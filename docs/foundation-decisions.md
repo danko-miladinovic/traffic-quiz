@@ -30,6 +30,8 @@ Phase 2 implements 30-day guest inactivity expiry, 24-hour active-attempt expiry
 
 Phase 3 extends cleanup to raw duel records and duels involving expired guest sessions. Invitations expire after 15 minutes and their persisted hash is removed at play start or termination. Terminal runtime rooms without connections are evicted after five minutes. Restarts abort unfinished games; no restart-transparent recovery or high availability is promised.
 
+Phase 5 uses first-party PostgreSQL analytics rather than an external provider. ANALYTICS_ENABLED defaults false; an independent 35-day consent cookie and explicit opt-in are required before event collection. Accepted gameplay events commit with their action and stable replay key. Raw analytics/visit data is kept for 35 days to finalize calendar months; count-only aggregates cover the current and previous 12 UTC calendar months. This analytics exception does not extend gameplay retention. Reports are operator CLI output and label unique/returning metrics as consenting-browser estimates. See docs/analytics.md.
+
 ## Remaining review gates
 
 - Qualified reviewer approval and current-law verification for the draft bank.

@@ -7,7 +7,8 @@
     "./env": "./src/env.ts",
     "./practice": "./src/practice.ts",
     "./duel": "./src/duel.ts",
-    "./education": "./src/education.ts"
+    "./education": "./src/education.ts",
+    "./analytics": "./src/analytics.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

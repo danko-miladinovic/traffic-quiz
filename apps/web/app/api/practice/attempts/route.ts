@@ -1,3 +1,4 @@
+import { analyticsFlag } from "@duel/domain/analytics";
 import { startPractice } from "@duel/db/practice";
 import {
   body,
@@ -16,6 +17,7 @@ export async function POST(request: Request) {
       json(
         await startPractice(database(), await guestHash(), await body(request), {
           allowDemo: demoEnabled(),
+          analytics: analyticsFlag(process.env.ANALYTICS_ENABLED),
         }),
       ),
     true,

@@ -52,7 +52,7 @@ The random 256-bit guest credential is held in an HttpOnly, SameSite=Lax cookie;
 
 Every write validates Origin against WEB_ORIGIN and rejects cross-site fetches. JSON input is bounded to 2 KiB. Per-process in-memory guards cap anonymous/session request rates and bucket growth without storing IPs; a database-backed limit permits at most ten new attempts per guest per minute. These are MVP limits, not distributed edge abuse protection. Do not trust forwarded IP/origin headers without a deliberate proxy configuration.
 
-The server exposes optional typed event hooks for practice_started, question_answered, and practice_completed. Accepted actions produce stable opaque event IDs; replayed requests produce no duplicate hook calls. No hook/provider is connected by default. Hooks are best-effort after commit and have no delivery guarantee; add durable event delivery and consent behavior when analytics is implemented in phase 5.
+The server exposes optional typed event hooks for practice_started, question_answered, and practice_completed. Accepted actions produce stable opaque event IDs; replayed requests produce no duplicate hook calls. No hook/provider is connected by default. Hooks are best-effort after commit and have no delivery guarantee; phase 5 separately records first-party events in the accepted-action transaction when collection is enabled and the guest has explicitly consented. The observer hook remains unconnected. See [analytics consent and reporting](analytics.md).
 
 ## Retention
 

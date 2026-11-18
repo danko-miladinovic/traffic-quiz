@@ -73,6 +73,8 @@ model GuestSession {
   createdAt   DateTime @default(now())
   lastSeenAt  DateTime @default(now())
   expiresAt   DateTime
+  analyticsVisitorId String? @db.Uuid
+  analyticsVisitor AnalyticsVisitor? @relation(fields: [analyticsVisitorId], references: [id], onDelete: SetNull)
   attempts    PracticeAttempt[]
   createdDuels Duel[] @relation("DuelCreator")
   duelPlayers DuelPlayer[]
@@ -214,4 +216,52 @@ model DuelAnswer {
   elapsedMs   Int
   receivedAt  DateTime
   @@id([questionId, seat])
+}
+
+
+model AnalyticsVisitor {
+  id String @id @default(uuid()) @db.Uuid
+  tokenHash String @unique @db.Char(64)
+  consentUntil DateTime
+  createdAt DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+  expiresAt DateTime
+  guests GuestSession[]
+  visits AnalyticsVisit[]
+  events AnalyticsEvent[]
+  @@index([expiresAt])
+}
+model AnalyticsVisit {
+  id String @id @default(uuid()) @db.Uuid
+  visitorId String @db.Uuid
+  visitor AnalyticsVisitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  startedAt DateTime
+  lastSeenAt DateTime
+  source String @db.VarChar(10)
+  returning Boolean
+  events AnalyticsEvent[]
+  @@index([visitorId, lastSeenAt])
+  @@index([startedAt])
+}
+model AnalyticsEvent {
+  id String @id @db.Char(64)
+  visitorId String @db.Uuid
+  visitor AnalyticsVisitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  visitId String @db.Uuid
+  visit AnalyticsVisit @relation(fields: [visitId], references: [id], onDelete: Cascade)
+  name String @db.VarChar(24)
+  mode String @db.VarChar(8)
+  resourceKey String? @db.Char(64)
+  page String? @db.VarChar(160)
+  demo Boolean @default(false)
+  occurredAt DateTime
+  @@index([occurredAt])
+  @@index([visitorId, occurredAt])
+}
+model AnalyticsAggregate {
+  period String @db.VarChar(5)
+  startsAt DateTime @db.Date
+  counts Json
+  updatedAt DateTime
+  @@id([period, startsAt])
 }

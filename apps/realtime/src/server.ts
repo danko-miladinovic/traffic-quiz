@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import { createDatabase } from "@duel/db";
 import { databaseEnv, realtimeEnv } from "@duel/domain/env";
 import { duelRulesSchema } from "@duel/domain/duel";
+import { analyticsFlag } from "@duel/domain/analytics";
 import { createDuelService } from "./service";
 
 config({ path: new URL("../../../.env", import.meta.url).pathname, quiet: true });
@@ -25,6 +26,7 @@ try {
     connectionString: database.data.DATABASE_URL,
     webOrigin: env.data.WEB_ORIGIN,
     rules: rules.data,
+    analytics: analyticsFlag(process.env.ANALYTICS_ENABLED),
     allowDemo: process.env.NODE_ENV !== "production" && process.env.PRACTICE_DEMO === "true",
   });
   try {

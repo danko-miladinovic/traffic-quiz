@@ -1,6 +1,6 @@
 # Project guidance
 
-Read README.md, docs/implementation-plan.md, docs/foundation-decisions.md, docs/practice.md, docs/duels.md, and docs/education.md before changing the application. Practice, private multiplayer, and educational routing/SEO are implemented; lesson publication awaits qualified review. Analytics is the next implementation phase.
+Read README.md, docs/implementation-plan.md, docs/foundation-decisions.md, docs/practice.md, docs/duels.md, and docs/education.md, and docs/analytics.md before changing the application. Practice, private multiplayer, and educational routing/SEO are implemented; lesson publication awaits qualified review. Optional first-party analytics is implemented and disabled by default; advertising placeholders are next.
 
 ## Product constraints
 
@@ -39,3 +39,6 @@ Read README.md, docs/implementation-plan.md, docs/foundation-decisions.md, docs/
 - Keep invitation tokens in URL fragments and server memory; persist only their hash. Keep Socket.IO's trailing-slash proxy and both transport paths working when changing routing.
 
 - Keep lesson drafts out of public routes, props, related links and sitemaps. Never fabricate review evidence or enable search indexing as a shortcut to publication. Run npm run test:education for editorial/SEO changes.
+
+- Preserve explicit analytics consent and withdrawal. Keep ANALYTICS_ENABLED disabled by default, never accept client outcomes or raw URLs/answers as telemetry, and retain server-transaction deduplication. Reports cover consenting browsers only.
+- Run database, realtime and browser harnesses sequentially against a disposable database: retention tests advance time and realtime owns a database-wide lock. Analytics raw retention is 35 days, gameplay 30 days; see docs/analytics.md.

@@ -102,6 +102,8 @@ Acceptance: public lessons are readable without client JavaScript, metadata is u
 
 ## Phase 5 — Privacy-conscious analytics
 
+Implemented: first-party PostgreSQL event storage, separate opt-in credential/preferences, withdrawal and privacy-signal handling, server-transaction gameplay deduplication, bounded browser page/share events, sanitized channel attribution, 30-minute visits, consenting-browser reports, and count-only daily/monthly retention snapshots. See [analytics setup, event definitions and limits](analytics.md). Collection defaults off in both processes. Raw analytics retention is 35 days to finalize calendar-month counts; gameplay remains 30 days. Production activation still requires deployment-specific privacy/operational review.
+
 - Select an analytics approach after assessing hosting cost, data processing, consent requirements, and metric limitations. Avoid collecting unnecessary personal information.
 - Define events: page view, practice started, question answered, practice completed, duel created, invite action, player joined, duel started, duel completed, rematch requested, and challenge shared.
 - Count server-confirmed gameplay outcomes once using event IDs. Do not send both client and server copies of the same completion event.

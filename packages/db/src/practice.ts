@@ -19,6 +19,7 @@ import { Prisma } from "../generated/client";
 import type { Database } from "./client";
 import { demoCategory, demoQuestions } from "./demo";
 import { transaction } from "./transaction";
+import { recordGuestAnalytics, cleanupAnalytics } from "./analytics";
 
 export const GUEST_DAYS = 30;
 export const ATTEMPT_HOURS = 24;
@@ -178,7 +179,12 @@ export async function startPractice(
   db: Database,
   hash: string,
   input: unknown,
-  options: { allowDemo?: boolean; now?: Date; onEvent?: PracticeEventHook } = {},
+  options: {
+    allowDemo?: boolean;
+    now?: Date;
+    onEvent?: PracticeEventHook;
+    analytics?: boolean;
+  } = {},
 ) {
   const parsed = practiceStartSchema.safeParse(input);
   if (!parsed.success)
@@ -265,6 +271,13 @@ export async function startPractice(
       },
       include: includeAttempt,
     });
+    await recordGuestAnalytics(
+      tx,
+      guest.id,
+      { name: "practice_started", key: attempt.id, mode: "practice", resource: attempt.id, demo },
+      now,
+      !!options.analytics,
+    );
     return { view: view(attempt, now), events: [event("practice_started", attempt.id, attempt)] };
   });
   emit(options.onEvent, result.events);
@@ -303,7 +316,12 @@ export async function answerPractice(
   hash: string,
   id: string,
   input: unknown,
-  options: { allowDemo?: boolean; now?: Date; onEvent?: PracticeEventHook } = {},
+  options: {
+    allowDemo?: boolean;
+    now?: Date;
+    onEvent?: PracticeEventHook;
+    analytics?: boolean;
+  } = {},
 ) {
   const parsed = practiceAnswerSchema.safeParse(input);
   if (!parsed.success)
@@ -345,6 +363,27 @@ export async function answerPractice(
       data: { nextPosition: { increment: 1 }, completedAt: completed ? now : null },
       include: includeAttempt,
     });
+    await recordGuestAnalytics(
+      tx,
+      updated.guestId,
+      {
+        name: "question_answered",
+        key: questionId,
+        mode: "practice",
+        resource: id,
+        demo: updated.demo,
+      },
+      now,
+      !!options.analytics,
+    );
+    if (completed)
+      await recordGuestAnalytics(
+        tx,
+        updated.guestId,
+        { name: "practice_completed", key: id, mode: "practice", resource: id, demo: updated.demo },
+        now,
+        !!options.analytics,
+      );
     const events = [event("question_answered", questionId, updated)];
     if (completed) events.push(event("practice_completed", id, updated));
     return { view: view(updated, now), events };
@@ -354,6 +393,7 @@ export async function answerPractice(
 }
 
 export async function cleanupPractice(db: Database, now = new Date()) {
+  await cleanupAnalytics(db, now);
   return db.$transaction(async (tx) => {
     const duels = await tx.duel.deleteMany({
       where: {

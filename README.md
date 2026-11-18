@@ -4,7 +4,7 @@ A free, mobile-first traffic education app for Serbia, combining practice quizze
 
 ## Project status
 
-Phase 4 educational routing and SEO infrastructure are implemented alongside practice and private multiplayer. Open `/ucenje` for the learning hub and five category pages; the five lesson drafts stay private pending qualified review. See [the educational guide](docs/education.md). Multiplayer includes invitation links/QR codes, ready checks, five synchronized questions, server scoring, reconnect grace, results and mutual rematches. Educational availability still depends on reviewed, published content; the supplied bank remains DRAFT. See [the duel guide](docs/duels.md), [practice guide](docs/practice.md), [implementation plan](docs/implementation-plan.md), and [foundation decisions](docs/foundation-decisions.md).
+Phase 5 adds optional first-party analytics with explicit consent, server-confirmed event counts, bounded retention and operator reports. Collection stays disabled by default; see [analytics setup and definitions](docs/analytics.md). Educational routing and SEO infrastructure are implemented alongside practice and private multiplayer. Open `/ucenje` for the learning hub and five category pages; the five lesson drafts stay private pending qualified review. See [the educational guide](docs/education.md). Multiplayer includes invitation links/QR codes, ready checks, five synchronized questions, server scoring, reconnect grace, results and mutual rematches. Educational availability still depends on reviewed, published content; the supplied bank remains DRAFT. See [the duel guide](docs/duels.md), [practice guide](docs/practice.md), [implementation plan](docs/implementation-plan.md), and [foundation decisions](docs/foundation-decisions.md).
 
 See [verification results and limitations](docs/verification.md). Qualified content review, real-device testing, and screen-reader QA remain launch gates.
 
@@ -60,6 +60,8 @@ Open http://localhost:3000. The realtime service provides http://localhost:3001/
 Practice now requires PostgreSQL. To test the full interaction while the traffic questions await review, run `PRACTICE_DEMO=true npm run dev`, then open `/vezbanje` and choose **Tehnička proba**. This opt-in mode uses clearly labeled synthetic questions and is disabled in production. See [the practice guide](docs/practice.md) for details and browser-test setup.
 
 For multiplayer, open `/duel`, create a technical-probe room, and open its invitation in a separate browser profile/private window. Both players must mark themselves ready. A second device needs a reachable WEB_ORIGIN instead of localhost; see [phone/QR setup and duel operations](docs/duels.md). Apply the latest migrations before restarting the services.
+
+`ANALYTICS_ENABLED=false` keeps optional collection disabled. Apply all migrations before opting in to the local preview; `npm run analytics:report` prints consenting-browser estimates without a public dashboard.
 
 `SITE_URL` and `SEARCH_INDEXING_ENABLED` configure build-time canonicals and search controls; indexing stays disabled by default. See [the publication and SEO workflow](docs/education.md).
 

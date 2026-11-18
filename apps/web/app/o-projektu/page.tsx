@@ -27,12 +27,23 @@ export default function About() {
       </p>
       <h2>Privatnost u ovoj verziji</h2>
       <p>
-        Aplikacija ne uključuje analitiku, oglase ni korisničke naloge. Kada započneš vežbanje,
-        koristimo privatni kolačić sesije da sačuvamo tvoje odgovore, mesto u duelu i omogućimo
-        nastavak u istom pregledaču. Ne tražimo ime ni imejl. Sesija ističe posle 30 dana
-        neaktivnosti, a pokušaji i zapisi duela se brišu nakon 30 dana kroz periodično čišćenje.
-        Aktivno vežbanje može da se nastavi u roku od 24 sata. Kolačić nije namenjen praćenju niti
-        oglašavanju.
+        Nema oglasa ni korisničkih naloga. Neobavezna analitika je podrazumevano isključena i, kada
+        je ponuđena, radi samo uz tvoju izričitu dozvolu. Kada započneš vežbanje, koristimo privatni
+        kolačić sesije da sačuvamo tvoje odgovore, mesto u duelu i omogućimo nastavak u istom
+        pregledaču. Ne tražimo ime ni imejl. Sesija ističe posle 30 dana neaktivnosti, a pokušaji i
+        zapisi duela se brišu nakon 30 dana kroz periodično čišćenje. Aktivno vežbanje može da se
+        nastavi u roku od 24 sata. Kolačić nije namenjen praćenju niti oglašavanju.
+      </p>
+      <h2>Neobavezna analitika</h2>
+      <p>
+        Izbor možeš da promeniš kroz „Postavke analitike” pri dnu stranice kada je ova mogućnost
+        uključena. Odbijanje ne utiče na vežbanje ni duele. Koristimo zaseban privatni kolačić i
+        našu bazu, bez spoljnog analitičkog servisa. Beležimo kategorije stranica i potvrđene
+        radnje, bez IP adresa u analitičkoj bazi, sadržaja odgovora ili pozivnih tajni. Pseudonimni
+        događaji i posete čuvaju se do 35 dana radi mesečnih izveštaja; zbirni brojevi bez
+        identifikatora do 13 meseci. Povlačenje dozvole briše povezane sirove analitičke podatke;
+        prethodni zbirni brojevi mogu ostati. Broj posetilaca je procena i obuhvata samo one koji su
+        dozvolili analitiku.
       </p>
       <p>
         Server i pružalac hostinga mogu obrađivati tehničke podatke o zahtevima. Pre javnog

@@ -52,6 +52,9 @@ export async function establishSession() {
     token = randomBytes(32).toString("hex");
     await openGuestSession(database(), hash(token));
   }
+  // Dynamic import avoids a module initialization cycle between shared HTTP helpers.
+  const { linkGuestAnalytics } = await import("./analytics-server");
+  await linkGuestAnalytics(hash(token));
   const response = json({ ok: true });
   response.cookies.set(cookieName, token, {
     httpOnly: true,

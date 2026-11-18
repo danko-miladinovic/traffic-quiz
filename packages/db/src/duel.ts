@@ -12,6 +12,7 @@ import { Prisma } from "../generated/client";
 import type { Database } from "./client";
 import { transaction } from "./transaction";
 import { demoCategory, demoQuestions } from "./demo";
+import { recordGuestAnalytics, recordRoomAnalytics } from "./analytics";
 
 const activePhases = ["WAITING", "READY", "ROUND", "ROUND_RESULT"] as const;
 const includeGame = {
@@ -77,7 +78,10 @@ function shuffle<T>(values: readonly T[]) {
 }
 
 export class DuelStore {
-  constructor(readonly db: Database) {}
+  constructor(
+    readonly db: Database,
+    readonly analytics = false,
+  ) {}
 
   async authenticate(hash: string, now: number) {
     const guest = await this.db.guestSession.findUnique({ where: { tokenHash: hash } });
@@ -226,6 +230,13 @@ export class DuelStore {
         },
         include: includeGame,
       });
+      await recordGuestAnalytics(
+        tx,
+        guestId,
+        { name: "duel_created", key: row.id, mode: "duel", resource: row.id, demo },
+        new Date(now),
+        this.analytics,
+      );
       return { game: fromRow(row), fresh: true };
     });
     if (game.fresh && !secondGuestId) game.game.inviteToken = token;
@@ -263,6 +274,19 @@ export class DuelStore {
             },
           });
           if (active) throw new DuelError("ACTIVE_DUEL", "Već imaš aktivan duel.", 409);
+          await recordGuestAnalytics(
+            tx,
+            player.guestId,
+            {
+              name: "player_joined",
+              key: next.id,
+              mode: "duel",
+              resource: next.id,
+              demo: next.demo,
+            },
+            new Date(),
+            this.analytics,
+          );
           await tx.duelPlayer.create({
             data: { duelId: next.id, ...player, disconnectedAt: date(player.disconnectedAt) },
           });
@@ -278,13 +302,67 @@ export class DuelStore {
           });
         }
       }
+      if (previous.roundIndex < 0 && next.roundIndex >= 0)
+        await recordRoomAnalytics(
+          tx,
+          next.players.map((player) => player.guestId),
+          { name: "duel_started", key: next.id, mode: "duel", resource: next.id, demo: next.demo },
+          new Date(next.questions[0].opensAt! - next.rules.startMs),
+          this.analytics,
+        );
+      if (previous.phase !== "FINISHED" && next.phase === "FINISHED")
+        await recordRoomAnalytics(
+          tx,
+          next.players.map((player) => player.guestId),
+          {
+            name: "duel_completed",
+            key: next.id,
+            mode: "duel",
+            resource: next.id,
+            demo: next.demo,
+          },
+          new Date(next.endedAt!),
+          this.analytics,
+        );
+      for (const player of next.players)
+        if (
+          player.rematchReady &&
+          !previous.players.find((old) => old.seat === player.seat)?.rematchReady
+        )
+          await recordGuestAnalytics(
+            tx,
+            player.guestId,
+            {
+              name: "rematch_requested",
+              key: next.id,
+              mode: "duel",
+              resource: next.id,
+              demo: next.demo,
+            },
+            new Date(),
+            this.analytics,
+          );
       for (const question of next.questions) {
         const old = previous.questions[question.position];
         for (const answer of question.answers) {
-          if (!old.answers.some((item) => item.seat === answer.seat))
+          if (!old.answers.some((item) => item.seat === answer.seat)) {
+            await recordGuestAnalytics(
+              tx,
+              next.players.find((player) => player.seat === answer.seat)!.guestId,
+              {
+                name: "question_answered",
+                key: `${question.id}:${answer.seat}`,
+                mode: "duel",
+                resource: next.id,
+                demo: next.demo,
+              },
+              new Date(answer.receivedAt),
+              this.analytics,
+            );
             await tx.duelAnswer.create({
               data: { questionId: question.id, ...answer, receivedAt: new Date(answer.receivedAt) },
             });
+          }
         }
         if (
           question.opensAt !== old.opensAt ||

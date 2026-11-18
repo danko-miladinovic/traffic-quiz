@@ -27,6 +27,7 @@ export async function createDuelService(
     webOrigin: string;
     rules: DuelRules;
     allowDemo: boolean;
+    analytics?: boolean;
     now?: () => number;
   },
 ) {
@@ -38,7 +39,7 @@ export async function createDuelService(
   let leaseLost = false;
   let release: (() => Promise<void>) | undefined;
   let interval: ReturnType<typeof setInterval> | undefined;
-  const store = new DuelStore(db);
+  const store = new DuelStore(db, !!settings.analytics);
   const http = createServer((request, response) => {
     if (request.method === "GET" && request.url === "/health") {
       response.writeHead(ready && !engine.failed ? 200 : 503, {

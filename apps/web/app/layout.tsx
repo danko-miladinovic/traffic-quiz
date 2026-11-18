@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import { AnalyticsPreferences } from "../components/analytics-preferences";
+import { analyticsFlag } from "@duel/domain/analytics";
 import { site, privateRobots } from "../lib/seo";
 
 export const metadata: Metadata = {
@@ -44,6 +46,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="sadrzaj" tabIndex={-1}>
           {children}
         </main>
+        {analyticsFlag(process.env.ANALYTICS_ENABLED) && <AnalyticsPreferences />}
         <footer className="site-footer container">
           <span>Saobraćajni Duel © {new Date().getFullYear()}</span>
           <span>Srbija · B kategorija · Besplatno za sve</span>
