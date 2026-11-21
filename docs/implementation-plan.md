@@ -116,6 +116,8 @@ Acceptance: event payloads and retention are documented, duplicate events do not
 
 ## Phase 6 — Advertising placeholders
 
+Implemented: shared AdSlot/provider boundary, five fixed placement IDs, runtime surface/state guards, reserved responsive dimensions, explicit Serbian preview labeling, and an opt-in development-only ADS_PREVIEW flag. Slots render only on the homepage, categories, published articles and completed practice/duel result views, outside quiz controls. Disabled/production slots render no wrapper or gap. No real advertising, sponsor data or impression collection exists. See [advertising preview and placement rules](advertising.md).
+
 - Implement a reusable `AdSlot` with placement IDs, reserved dimensions, accessible labeling, and a provider interface. Default the feature flag to disabled; preview placeholders in development.
 - Allow placements on the homepage, articles, category pages, practice results, and completed duel results.
 - Explicitly exclude active duel questions. Keep slots separated from answer, navigation, rematch, and share controls; reserve space to prevent layout shifts.

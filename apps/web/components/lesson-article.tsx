@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { AdSlot } from "./ad-slot";
+import { adsDisabled, type AdConfiguration } from "../lib/ad-policy";
 import type { Lesson } from "@duel/domain/education";
 import { jsonLd, lessonStructuredData } from "../lib/seo";
 
@@ -8,12 +10,14 @@ export function LessonArticle({
   related,
   origin,
   practiceCategory,
+  ads = adsDisabled,
 }: {
   lesson: Lesson;
   categoryTitle: string;
   related: Lesson[];
   origin?: string;
   practiceCategory?: string;
+  ads?: AdConfiguration;
 }) {
   return (
     <div className="container education-page">
@@ -86,6 +90,11 @@ export function LessonArticle({
           </div>
         </div>
       </article>
+      <AdSlot
+        placement="lesson-after-content"
+        context={{ surface: "lesson" }}
+        configuration={ads}
+      />
       <section className="education-next" aria-labelledby="next-title">
         <div>
           <p className="eyebrow">OD ČITANJA DO RAZUMEVANJA</p>

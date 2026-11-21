@@ -9,6 +9,8 @@ import type {
   PracticeView,
 } from "@duel/domain/practice";
 import { Button } from "./button";
+import { AdSlot } from "./ad-slot";
+import { adsDisabled, type AdConfiguration } from "../lib/ad-policy";
 
 const attemptKey = "duel.practice.attempt";
 const intentKey = "duel.practice.start";
@@ -68,7 +70,7 @@ function message(error: unknown) {
     : "Veza je prekinuta ili je server spor. Pokušaj ponovo — prihvaćen odgovor neće biti upisan dvaput.";
 }
 
-export function Practice() {
+export function Practice({ ads = adsDisabled }: { ads?: AdConfiguration }) {
   const [categories, setCategories] = useState<PracticeCategory[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [attempt, setAttempt] = useState<PracticeView | null>(null);
@@ -440,6 +442,13 @@ export function Practice() {
             Vrati se na izbor oblasti
           </button>
         </div>
+      )}
+      {results && !terminal && (
+        <AdSlot
+          placement="practice-after-results"
+          context={{ surface: "practice", phase: "results" }}
+          configuration={ads}
+        />
       )}
       <p className="practice-privacy">
         Napredak se čuva uz privatnu sesiju u ovom pregledaču. Ne tražimo ime ni nalog.{" "}

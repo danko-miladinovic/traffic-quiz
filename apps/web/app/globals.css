@@ -1606,3 +1606,45 @@ label.practice-option:hover {
   opacity: 0.55;
   cursor: default;
 }
+
+/* Static preview slots reserve space before paint; no async loading or ad refresh. */
+.ad-slot {
+  margin-block: 48px;
+  padding: 20px 24px;
+  border: 1px dashed var(--muted);
+  border-radius: 12px;
+  background: #f0f2ed;
+  color: var(--ink);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  text-align: center;
+}
+.ad-slot--banner {
+  min-block-size: 176px;
+}
+.ad-slot--rectangle {
+  min-block-size: 280px;
+}
+.ad-slot-label {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.ad-slot-content {
+  align-self: center;
+  padding-block: 16px;
+}
+.ad-slot-content strong {
+  display: block;
+  font-size: 1.125rem;
+}
+.ad-slot-content p {
+  margin-block: 8px 0;
+  font-size: 0.875rem;
+}
+@media (max-width: 700px) {
+  .ad-slot--banner {
+    min-block-size: 200px;
+  }
+}

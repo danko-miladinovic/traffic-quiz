@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { AdSlot } from "../../../../components/ad-slot";
+import { configuredAds } from "../../../../lib/ad-server";
 import { notFound } from "next/navigation";
 import { categories, lessons, categoryPath, lessonPath } from "../../../../lib/education";
 import { publicMetadata } from "../../../../lib/seo";
@@ -55,6 +57,11 @@ export default async function CategoryPage({ params }: Props) {
           </div>
         )}
       </section>
+      <AdSlot
+        placement="category-after-lessons"
+        context={{ surface: "category" }}
+        configuration={configuredAds()}
+      />
       <section className="education-next" aria-labelledby="practice-title">
         <div>
           <h2 id="practice-title">Nastavi svojim tempom.</h2>

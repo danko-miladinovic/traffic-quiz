@@ -31,6 +31,7 @@ export default defineConfig({
         ANALYTICS_ENABLED: "true",
         NEXT_TELEMETRY_DISABLED: "1",
         SEARCH_INDEXING_ENABLED: "false",
+        ADS_PREVIEW: "true",
         SITE_URL: baseURL,
         REALTIME_PORT: "3311",
       },

@@ -1,3 +1,4 @@
+import { configuredAds } from "../../lib/ad-server";
 import type { Metadata } from "next";
 import { Duel } from "../../components/duel";
 
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
   referrer: "no-referrer",
 };
 export default function DuelPage() {
-  return <Duel />;
+  return <Duel ads={configuredAds()} />;
 }

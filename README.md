@@ -4,7 +4,7 @@ A free, mobile-first traffic education app for Serbia, combining practice quizze
 
 ## Project status
 
-Phase 5 adds optional first-party analytics with explicit consent, server-confirmed event counts, bounded retention and operator reports. Collection stays disabled by default; see [analytics setup and definitions](docs/analytics.md). Educational routing and SEO infrastructure are implemented alongside practice and private multiplayer. Open `/ucenje` for the learning hub and five category pages; the five lesson drafts stay private pending qualified review. See [the educational guide](docs/education.md). Multiplayer includes invitation links/QR codes, ready checks, five synchronized questions, server scoring, reconnect grace, results and mutual rematches. Educational availability still depends on reviewed, published content; the supplied bank remains DRAFT. See [the duel guide](docs/duels.md), [practice guide](docs/practice.md), [implementation plan](docs/implementation-plan.md), and [foundation decisions](docs/foundation-decisions.md).
+Phase 6 adds development-only, labeled advertising placeholders on allowed public pages and completed results; real advertising remains absent and production slots stay disabled. See [placement and preview instructions](docs/advertising.md). Phase 5 adds optional first-party analytics with explicit consent, server-confirmed event counts, bounded retention and operator reports. Collection stays disabled by default; see [analytics setup and definitions](docs/analytics.md). Educational routing and SEO infrastructure are implemented alongside practice and private multiplayer. Open `/ucenje` for the learning hub and five category pages; the five lesson drafts stay private pending qualified review. See [the educational guide](docs/education.md). Multiplayer includes invitation links/QR codes, ready checks, five synchronized questions, server scoring, reconnect grace, results and mutual rematches. Educational availability still depends on reviewed, published content; the supplied bank remains DRAFT. See [the duel guide](docs/duels.md), [practice guide](docs/practice.md), [implementation plan](docs/implementation-plan.md), and [foundation decisions](docs/foundation-decisions.md).
 
 See [verification results and limitations](docs/verification.md). Qualified content review, real-device testing, and screen-reader QA remain launch gates.
 
@@ -76,6 +76,7 @@ npm run typecheck
 npm test
 npm run content:validate
 npm run test:education
+npm run test:ads
 npm run build
 ```
 

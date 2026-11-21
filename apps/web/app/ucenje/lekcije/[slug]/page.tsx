@@ -1,3 +1,4 @@
+import { configuredAds } from "../../../../lib/ad-server";
 import { notFound } from "next/navigation";
 import { LessonArticle } from "../../../../components/lesson-article";
 import { getLesson, lessons, categories, lessonPath } from "../../../../lib/education";
@@ -27,6 +28,7 @@ export default async function LessonPage({ params }: Props) {
   const category = categories.find((category) => category.slug === lesson.category)!;
   return (
     <LessonArticle
+      ads={configuredAds()}
       lesson={lesson}
       categoryTitle={category.title}
       related={lessons.filter((item) => lesson.related.includes(item.slug))}

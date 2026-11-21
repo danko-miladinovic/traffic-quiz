@@ -7,6 +7,8 @@ import QRCode from "qrcode";
 import type { DuelAction, DuelReply, DuelRoundFeedback, DuelView } from "@duel/domain/duel";
 import type { PracticeCategory } from "@duel/domain/practice";
 import { Button } from "./button";
+import { AdSlot } from "./ad-slot";
+import { adsDisabled, type AdConfiguration } from "../lib/ad-policy";
 import { trackInvitation } from "../lib/analytics-client";
 
 const roomKey = "duel.multiplayer.room";
@@ -65,7 +67,7 @@ class RequestError extends Error {
   }
 }
 
-export function Duel() {
+export function Duel({ ads = adsDisabled }: { ads?: AdConfiguration }) {
   const [categories, setCategories] = useState<PracticeCategory[]>([]);
   const [game, setGame] = useState<DuelView | null>(null);
   const [connected, setConnected] = useState(false);
@@ -786,6 +788,13 @@ export function Duel() {
             </button>
           )}
         </div>
+      )}
+      {game?.phase === "FINISHED" && game.result && (
+        <AdSlot
+          placement="duel-after-results"
+          context={{ surface: "duel", phase: game.phase }}
+          configuration={ads}
+        />
       )}
       <p className="practice-privacy">
         Pozivni link služi za pridruživanje, a privatna sesija čuva tvoje mesto. Bez naloga i oglasa

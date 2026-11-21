@@ -32,6 +32,8 @@ Phase 3 extends cleanup to raw duel records and duels involving expired guest se
 
 Phase 5 uses first-party PostgreSQL analytics rather than an external provider. ANALYTICS_ENABLED defaults false; an independent 35-day consent cookie and explicit opt-in are required before event collection. Accepted gameplay events commit with their action and stable replay key. Raw analytics/visit data is kept for 35 days to finalize calendar months; count-only aggregates cover the current and previous 12 UTC calendar months. This analytics exception does not extend gameplay retention. Reports are operator CLI output and label unique/returning metrics as consenting-browser estimates. See docs/analytics.md.
 
+Phase 6 introduces a pure AdSlot provider boundary with only none/placeholder renderers. ADS_PREVIEW defaults false and is ignored outside development, with an additional production component guard. Five allowed placements have reserved space and surface/state checks; gameplay slots exist only for completed result views. No network provider, impressions, cookies, schema changes or advertising dashboard is added. See docs/advertising.md.
+
 ## Remaining review gates
 
 - Qualified reviewer approval and current-law verification for the draft bank.

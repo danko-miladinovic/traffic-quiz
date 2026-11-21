@@ -1,5 +1,27 @@
 # Verification history
 
+## Phase 6 — 2026-11-18
+
+Verified with Node 24.22.2. Browser and realtime checks used the existing disposable PostgreSQL 18 runtime; no development database, new schema, migration or dependency was required.
+
+| Check                     | Result                                                                                                                                                                                                                                                                                                                  |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Domain tests              | 16 passed; gameplay, publication and analytics boundaries remain intact                                                                                                                                                                                                                                                 |
+| Advertising checks        | 4 passed: development-only configuration, empty disabled/production rendering, every denied gameplay context, labeled noninteractive markup without remote/executable content, and article placement after full source/review content                                                                                   |
+| Education checks          | 3 passed; published-only selection, metadata/sitemaps, source/review rendering and no-JavaScript lesson template remain intact                                                                                                                                                                                          |
+| TypeScript                | Passed for all workspaces, browser tests and configuration                                                                                                                                                                                                                                                              |
+| Browser checks            | 28 passed across desktop and Pixel-sized Chromium, with preview explicitly enabled. New checks compare the homepage slot's initial no-JavaScript position/height to hydrated output, check no external requests, verify category placement and mobile overflow, and retain all analytics/education/gameplay regressions |
+| Gameplay placement checks | Practice slots absent during questions/feedback and after retry, present only on results; duel slots absent in lobby/questions/reveal/rematch/abort and present on completed results for both participants. Result slots were at least 48 CSS pixels below return/navigation controls                                   |
+| Realtime checks           | 9 passed after the browser harness stopped, including 20 concurrent rooms, authorization, reconnection and restart reconciliation                                                                                                                                                                                       |
+| Visual check              | Inspected mobile placeholder screenshot: readable label, reserved space, dashed noninteractive boundary and no answer-like control                                                                                                                                                                                      |
+| Production builds         | Realtime and Next.js Webpack passed with ADS_PREVIEW=true deliberately set; public educational routes retained static output                                                                                                                                                                                            |
+| Production guard          | Built server started with ADS_PREVIEW=true still produced no slot DOM or label, no empty intervening placement containers, no mobile overflow, and no external requests on homepage/category. Private page shells remained ad-free                                                                                      |
+| Formatting/diff           | Passed                                                                                                                                                                                                                                                                                                                  |
+
+The publication bank remains unchanged and unpublished. Article preview verification uses a synthetic review fixture in memory, never an actual published draft. No advertising network, sponsor creative, impression event, provider cookie, public deployment or remote CI result is claimed. Analytics remains separately disabled by default.
+
+Browser checks are emulation and the layout check covers the local static placeholder, not a future real provider. Physical-device/screen-reader QA and the phase 7 content, privacy, hosting/operations and current provider readiness work remain separate launch gates. Temporary verification services were stopped after checks.
+
 ## Phase 5 — 2026-11-17
 
 Verified with Node 24.22.2 and disposable PostgreSQL 18. No development database or real traffic-content publication was used.

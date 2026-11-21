@@ -1,3 +1,4 @@
+import { configuredAds } from "../../lib/ad-server";
 import type { Metadata } from "next";
 import { Practice } from "../../components/practice";
 
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
     "Vežbaj saobraćajna pravila po oblastima, bez naloga. Proveri odgovor i pročitaj objašnjenje.",
 };
 export default function PracticePage() {
-  return <Practice />;
+  return <Practice ads={configuredAds()} />;
 }

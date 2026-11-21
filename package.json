@@ -27,7 +27,8 @@
     "data:cleanup": "tsx --env-file-if-exists=.env packages/db/src/cleanup.ts",
     "test:education": "tsx --tsconfig apps/web/tsconfig.json --test apps/web/lib/education.test.tsx",
     "lessons:validate": "tsx scripts/validate-lessons.ts",
-    "analytics:report": "tsx scripts/analytics-report.ts"
+    "analytics:report": "tsx scripts/analytics-report.ts",
+    "test:ads": "tsx --tsconfig apps/web/tsconfig.json --test apps/web/lib/ad-policy.test.tsx"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.0",

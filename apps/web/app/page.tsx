@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { AdSlot } from "../components/ad-slot";
+import { configuredAds } from "../lib/ad-server";
 import { lessons } from "../lib/education";
 import { publicMetadata } from "../lib/seo";
 
@@ -144,6 +146,12 @@ export default function Home() {
           ))}
         </div>
       </section>
+      <AdSlot
+        placement="home-after-topics"
+        context={{ surface: "home" }}
+        configuration={configuredAds()}
+        contained
+      />
       <section className="container">
         <div className="duel-banner">
           <div>

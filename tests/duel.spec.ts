@@ -28,6 +28,7 @@ test("QR invitation, identical questions, shared results and mutual rematch", as
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   const url = await createRoom(page);
+  await expect(page.locator("[data-ad-placement]")).toHaveCount(0);
   expect(url).toMatch(/\/duel#poziv=[a-f0-9]{64}$/);
   const credential = (await page.context().cookies()).find(
     (cookie) => cookie.name === "duel_guest",
@@ -68,6 +69,8 @@ test("QR invitation, identical questions, shared results and mutual rematch", as
       await expect(
         guest.page.getByText(`PITANJE ${round + 1} OD 5`, { exact: true }),
       ).toBeVisible();
+      await expect(page.locator("[data-ad-placement]")).toHaveCount(0);
+      await expect(guest.page.locator("[data-ad-placement]")).toHaveCount(0);
       expect(await page.locator(".practice-question h2").textContent()).toBe(
         await guest.page.locator(".practice-question h2").textContent(),
       );
@@ -86,6 +89,7 @@ test("QR invitation, identical questions, shared results and mutual rematch", as
       await expect(
         page.getByText(`PITANJE ${round + 1} OD 5 · OBJAŠNJENJE`, { exact: true }),
       ).toBeVisible();
+      await expect(page.locator("[data-ad-placement]")).toHaveCount(0);
     }
     await expect(
       page.getByRole("heading", { name: "Dobar izazov. Sledeći je tvoj!" }),
@@ -97,6 +101,20 @@ test("QR invitation, identical questions, shared results and mutual rematch", as
     expect(await guest.page.evaluate(() => sessionStorage.getItem("duel.multiplayer.room"))).toBe(
       id,
     );
+    await expect(page.locator("[data-ad-placement]")).toHaveAttribute(
+      "data-ad-placement",
+      "duel-after-results",
+    );
+    await expect(guest.page.locator("[data-ad-placement]")).toHaveAttribute(
+      "data-ad-placement",
+      "duel-after-results",
+    );
+    const resultGap = await page.evaluate(
+      () =>
+        document.querySelector(".ad-slot")!.getBoundingClientRect().top -
+        document.querySelector(".practice-leave")!.getBoundingClientRect().bottom,
+    );
+    expect(resultGap).toBeGreaterThanOrEqual(47);
     await page.screenshot({ path: info.outputPath("result.png"), fullPage: true });
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
@@ -107,6 +125,8 @@ test("QR invitation, identical questions, shared results and mutual rematch", as
     await guest.page.getByRole("button", { name: "Želim revanš" }).click();
     await expect(page.getByRole("heading", { name: "Oboje ste tu. Spremni?" })).toBeVisible();
     await expect(guest.page.getByRole("heading", { name: "Oboje ste tu. Spremni?" })).toBeVisible();
+    await expect(page.locator("[data-ad-placement]")).toHaveCount(0);
+    await expect(guest.page.locator("[data-ad-placement]")).toHaveCount(0);
     const rematch = await page.evaluate(() => sessionStorage.getItem("duel.multiplayer.room"));
     expect(rematch).not.toBe(id);
     expect(await guest.page.evaluate(() => sessionStorage.getItem("duel.multiplayer.room"))).toBe(
@@ -114,6 +134,7 @@ test("QR invitation, identical questions, shared results and mutual rematch", as
     );
     await page.getByRole("button", { name: "Završi duel bez rezultata" }).click();
     await expect(guest.page.getByRole("heading", { name: "Duel je prekinut." })).toBeVisible();
+    await expect(guest.page.locator("[data-ad-placement]")).toHaveCount(0);
     expect(errors).toEqual([]);
   } finally {
     await guest.context.close();

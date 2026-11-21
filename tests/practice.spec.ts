@@ -15,6 +15,7 @@ test("practice completes, explains mistakes, resumes, and retries on desktop/mob
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await startDemo(page);
+  await expect(page.locator("[data-ad-placement]")).toHaveCount(0);
   await page.screenshot({ path: testInfo.outputPath("question.png"), fullPage: true });
   await expect(page.getByRole("button", { name: "Potvrdi odgovor" })).toBeDisabled();
   const initial = await page.evaluate(() => sessionStorage.getItem("duel.practice.attempt"));
@@ -29,6 +30,7 @@ test("practice completes, explains mistakes, resumes, and retries on desktop/mob
     await page.getByRole("button", { name: "Potvrdi odgovor" }).click();
     await expect(page.getByText(`${index + 1} / 5 odgovoreno`, { exact: true })).toBeVisible();
     await expect(page.locator(".practice-feedback")).toBeVisible();
+    await expect(page.locator("[data-ad-placement]")).toHaveCount(0);
     if (index === 0) {
       await expect(
         page.getByRole("heading", { name: "Još jedna prilika da naučiš" }),
@@ -44,6 +46,16 @@ test("practice completes, explains mistakes, resumes, and retries on desktop/mob
   await expect(page.getByRole("heading", { name: "Svaki pokušaj je korak napred." })).toBeVisible();
   await expect(page.getByText("80% tačnih odgovora", { exact: true })).toBeVisible();
   await expect(page.locator(".practice-score strong")).toHaveText("4/5");
+  await expect(page.locator("[data-ad-placement]")).toHaveAttribute(
+    "data-ad-placement",
+    "practice-after-results",
+  );
+  const resultGap = await page.evaluate(
+    () =>
+      document.querySelector(".ad-slot")!.getBoundingClientRect().top -
+      document.querySelector(".practice-leave")!.getBoundingClientRect().bottom,
+  );
+  expect(resultGap).toBeGreaterThanOrEqual(47);
   await page.screenshot({ path: testInfo.outputPath("result.png"), fullPage: true });
   await page.locator("details summary").first().click();
   await expect(page.locator("details").first().getByText("Tačan odgovor:")).toBeVisible();
@@ -51,6 +63,7 @@ test("practice completes, explains mistakes, resumes, and retries on desktop/mob
   await expect(page.getByText("80% tačnih odgovora", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Vežbaj ponovo" }).click();
   await expect(page.getByText("0 / 5 odgovoreno", { exact: true })).toBeVisible();
+  await expect(page.locator("[data-ad-placement]")).toHaveCount(0);
   expect(await page.evaluate(() => sessionStorage.getItem("duel.practice.attempt"))).not.toBe(
     initial,
   );
